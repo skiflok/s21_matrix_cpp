@@ -45,6 +45,13 @@ class S21Matrix {
   double determinant();                     //	Вычисляет и возвращает определитель текущей матрицы	матрица не является квадратной
   S21Matrix inverse_matrix();                //	Вычисляет и возвращает обратную матрицу	определитель матрицы равен 0
 
+  // support function
+
+  void setZeroMatrix ();
+  int GetRows() const;
+  int GetCols() const;
+  double **GetMatrix() const;
+
 };
 
 #endif //S21_MATRIX_CPP_S21_MATRIX_OOP_H

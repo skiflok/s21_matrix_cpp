@@ -2,10 +2,10 @@ CC=gcc -std=c11
 CFLAGS=-Wall -Wextra -Werror
 GCOV_LIBS=--coverage
 BUILD_PATH=./
-SOURCES=s21_matrix.c
-H=s21_matrix.h
-LIBO=s21_matrix.o
-LIBA=s21_matrix.a
+SOURCES=s21_matrix_oop.cpp
+H=s21_matrix_oop.h
+LIBO=s21_matrix_oop.o
+LIBA=s21_matrix_oop.a
 EXE=test.out
 
 OS = $(shell uname)
@@ -16,15 +16,20 @@ else
 	TST_LIBS=-lcheck -pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
 endif
 
-all: s21_matrix.a
+all: s21_matrix_oop.a
 
 clean:
 	rm -rf *.a && rm -rf *.o *.out
 	rm -rf *.info && rm -rf *.gcda && rm -rf *.gcno &&  rm -rf *.gcov
 	rm -rf report/ && rm -rf *.
 
-test: s21_matrix.a
-	$(CC) $(CFLAGS) test.c -L. $(LIBA) $(TST_LIBS) -o $(BUILD_PATH)$(EXE)
+
+test: s21_matrix_oop.a ../test/tests.cpp
+	@$(CC) $(CFLAGS) -lgtest test.cpp s21_matrix_oop.a -o test
+	@./test
+
+test123: s21_matrix_oop.a
+	$(CC) $(CFLAGS) tests.cpp -L. $(LIBA) $(TST_LIBS) -o $(BUILD_PATH)$(EXE)
 	$(BUILD_PATH)$(EXE)
 
 mytest: clean
@@ -33,12 +38,12 @@ mytest: clean
 
 rebuild: clean all
 
-s21_matrix.a: clean
+s21_matrix_oop.a: clean
 	$(CC) $(CFLAGS) -c $(SOURCES) -o $(BUILD_PATH)$(LIBO)
 	ar rcs $(LIBA) $(LIBO)
 	ranlib $(LIBA)
 
-gcov_report: s21_matrix.a
+gcov_report: s21_matrix_oop.a
 	$(CC) $(CFLAGS) $(GCOV_LIBS) test.c $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) -o $(BUILD_PATH)$(EXE)
 	$(BUILD_PATH)$(EXE)
 	lcov -t "test" -c -d $(BUILD_PATH) --output-file $(BUILD_PATH)coverage.info

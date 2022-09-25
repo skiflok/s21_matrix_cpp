@@ -6,15 +6,37 @@
 
 
 S21Matrix::S21Matrix() {
-  rows = 0;
-  cols = 0;
-  matrix = nullptr;
+  this->cols = 0;
+  this->rows = 0;
+  this->matrix = nullptr;
+}
+
+S21Matrix::S21Matrix(int rows, int cols) {
+  this->rows = rows;
+  this->cols = cols;
+}
+
+
+int S21Matrix::GetRows() const {
+  return rows;
+}
+int S21Matrix::GetCols() const {
+  return cols;
+}
+double **S21Matrix::GetMatrix() const {
+  return matrix;
+}
+
+void S21Matrix::setZeroMatrix() {
+  this->cols = 0;
+  this->rows = 0;
+  this->matrix = nullptr;
 }
 
 
 
 S21Matrix::~S21Matrix() {
-
+  delete matrix;
 }
 
 
@@ -29,8 +51,13 @@ int main() {
 
   std::cout << "test\n";
 
+//  S21Matrix m(3, 4);
+
+  S21Matrix m;
+
+
+  std::cout << m.GetRows() << "  " << m.GetCols() << "\n";
+
 
   return 0;
 }
-
-//}

@@ -48,9 +48,9 @@ class S21Matrix {
   // support function
 
   void setZeroMatrix ();
-  int GetRows() const;
-  int GetCols() const;
-  double **GetMatrix() const;
+  int getRows() const;
+  int getCols() const;
+  double **getMatrix() const;
 
 };
 

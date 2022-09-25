@@ -3,13 +3,15 @@
 
 TEST(Basic, defaultConstructor) {
   S21Matrix m;
-  EXPECT_EQ(m.GetRows(), 0);
+  EXPECT_EQ(m.getRows(), 0);
+  EXPECT_EQ(m.getCols(), 0);
+  EXPECT_EQ(m.getMatrix(), nullptr);
   std::cout << "test1" << "\n";
 }
 
 TEST(Basic, parameterizedCconstructor) {
   S21Matrix m1(0,2);
-  EXPECT_EQ(m1.GetRows(), 0);
+  EXPECT_EQ(m1.getRows(), 0);
   std::cout << "test2" << "\n";
 }
 

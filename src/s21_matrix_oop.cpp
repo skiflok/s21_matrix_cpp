@@ -6,26 +6,25 @@
 
 
 S21Matrix::S21Matrix() {
-  this->cols = 0;
-  this->rows = 0;
-  this->matrix = nullptr;
-  std::cout << "default constructor" << "\n";
+//  this->cols = 0;
+//  this->rows = 0;
+//  this->matrix = nullptr;
+  setZeroMatrix();
 }
 
 S21Matrix::S21Matrix(int rows, int cols) {
   this->rows = rows;
   this->cols = cols;
-  std::cout << "parameter constructor" << "\n";
 }
 
 
-int S21Matrix::GetRows() const {
+int S21Matrix::getRows() const {
   return rows;
 }
-int S21Matrix::GetCols() const {
+int S21Matrix::getCols() const {
   return cols;
 }
-double **S21Matrix::GetMatrix() const {
+double **S21Matrix::getMatrix() const {
   return matrix;
 }
 

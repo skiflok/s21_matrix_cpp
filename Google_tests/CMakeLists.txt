@@ -10,6 +10,6 @@ include_directories(../Google_tests/lib/googletest/include)
 # 'test1.cpp tests2.cpp' are source files with tests
 add_executable(Google_Tests_run tests.cpp)
 
-target_link_libraries(Google_Tests_run s21_matrix_oop.a)
+target_link_libraries(Google_Tests_run s21_matrix_oop)
 
 target_link_libraries(Google_Tests_run gtest gtest_main)

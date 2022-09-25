@@ -9,11 +9,13 @@ S21Matrix::S21Matrix() {
   this->cols = 0;
   this->rows = 0;
   this->matrix = nullptr;
+  std::cout << "default constructor" << "\n";
 }
 
 S21Matrix::S21Matrix(int rows, int cols) {
   this->rows = rows;
   this->cols = cols;
+  std::cout << "parameter constructor" << "\n";
 }
 
 
@@ -36,28 +38,28 @@ void S21Matrix::setZeroMatrix() {
 
 
 S21Matrix::~S21Matrix() {
-  delete matrix;
+//  delete matrix;
 }
 
 
 
-int main() {
-
-  int *a = new int;
-  delete a;
-  int *arr = new int [10];
-  delete [] arr;
-  arr = nullptr;
-
-  std::cout << "test\n";
-
-//  S21Matrix m(3, 4);
-
-  S21Matrix m;
-
-
-  std::cout << m.GetRows() << "  " << m.GetCols() << "\n";
-
-
-  return 0;
-}
+//int main() {
+//
+//  int *a = new int;
+//  delete a;
+//  int *arr = new int [10];
+//  delete [] arr;
+//  arr = nullptr;
+//
+//  std::cout << "test\n";
+//
+////  S21Matrix m(3, 4);
+//
+//  S21Matrix m;
+//
+//
+//  std::cout << m.GetRows() << "  " << m.GetCols() << "\n";
+//
+//
+//  return 0;
+//}

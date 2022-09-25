@@ -3,20 +3,18 @@
 #include "s21_matrix_oop.h"
 #include <exception>
 
-
-
 S21Matrix::S21Matrix() {
-//  this->cols = 0;
-//  this->rows = 0;
-//  this->matrix = nullptr;
   setZeroMatrix();
 }
 
 S21Matrix::S21Matrix(int rows, int cols) {
   this->rows = rows;
   this->cols = cols;
+  this->matrix = new double *[rows];
+  for (int i = 0; i < rows; ++i) {
+    this->matrix[i] = new double[cols];
+  }
 }
-
 
 int S21Matrix::getRows() const {
   return rows;
@@ -34,9 +32,18 @@ void S21Matrix::setZeroMatrix() {
   this->matrix = nullptr;
 }
 
-
-
 S21Matrix::~S21Matrix() {
+  try {
+    for (int i = 0; i < rows; ++i) {
+      delete[] matrix[i];
+    }
+    delete[] matrix;
+    matrix = nullptr;
+    rows = 0;
+    cols = 0;
+  } catch (std::exception) {
+
+  }
 //  delete matrix;
 }
 

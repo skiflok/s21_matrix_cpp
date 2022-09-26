@@ -47,10 +47,14 @@ class S21Matrix {
 
   // support function
 
-  void setZeroMatrix ();
+
   int getRows() const;
   int getCols() const;
   double **getMatrix() const;
+
+  void setZeroMatrix ();
+  void createMatrix();
+  void copyMatrix (const S21Matrix &other);
 
 };
 

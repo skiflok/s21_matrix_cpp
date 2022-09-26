@@ -10,9 +10,9 @@ TEST(Basic, defaultConstructor) {
 }
 
 TEST(Basic, parameterizedCconstructor) {
-  S21Matrix m(2,2);
+  S21Matrix m(2,3);
   EXPECT_EQ(m.getRows(), 2);
-
+  EXPECT_EQ(m.getCols(), 3);
   std::cout << "test2" << "\n";
 }
 

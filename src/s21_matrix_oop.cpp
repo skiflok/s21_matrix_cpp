@@ -10,10 +10,7 @@ S21Matrix::S21Matrix() {
 S21Matrix::S21Matrix(int rows, int cols) {
   this->rows = rows;
   this->cols = cols;
-  this->matrix = new double *[rows];
-  for (int i = 0; i < rows; ++i) {
-    this->matrix[i] = new double[cols];
-  }
+  this->createMatrix();
 }
 
 int S21Matrix::getRows() const {
@@ -30,6 +27,17 @@ void S21Matrix::setZeroMatrix() {
   this->cols = 0;
   this->rows = 0;
   this->matrix = nullptr;
+}
+
+void S21Matrix::createMatrix() {
+  this->matrix = new double *[rows];
+  for (int i = 0; i < rows; ++i) {
+    this->matrix[i] = new double[cols];
+  }
+}
+
+void S21Matrix::copyMatrix(const S21Matrix &other) {
+
 }
 
 S21Matrix::~S21Matrix() {

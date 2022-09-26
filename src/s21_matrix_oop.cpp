@@ -33,7 +33,18 @@ void S21Matrix::setZeroMatrix() {
 }
 
 S21Matrix::~S21Matrix() {
-  try {
+//  try {
+//    for (int i = 0; i < rows; ++i) {
+//      delete[] matrix[i];
+//    }
+//    delete[] matrix;
+//    matrix = nullptr;
+//    rows = 0;
+//    cols = 0;
+//  } catch (std::exception) {
+//
+//  }
+  if (matrix != nullptr) {
     for (int i = 0; i < rows; ++i) {
       delete[] matrix[i];
     }
@@ -41,10 +52,7 @@ S21Matrix::~S21Matrix() {
     matrix = nullptr;
     rows = 0;
     cols = 0;
-  } catch (std::exception) {
-
   }
-//  delete matrix;
 }
 
 

@@ -37,7 +37,14 @@ void S21Matrix::createMatrix() {
 }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {
-
+  this->rows = other.rows;
+  this->cols = other.cols;
+  this->createMatrix();
+  for (int i = 0; i < this->rows; ++i) {
+    for (int j = 0; j < this->cols; ++j) {
+      this->matrix[i][j] = other.matrix[i][j];
+    }
+  }
 }
 
 S21Matrix::~S21Matrix() {

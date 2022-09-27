@@ -1,5 +1,6 @@
 #include "../src/s21_matrix_oop.h"
 #include <gtest/gtest.h>
+#include <utility>
 
 TEST(Basic, defaultConstructor) {
   S21Matrix m;
@@ -23,6 +24,15 @@ TEST(Basic, copyConstructor) {
   // need equals test
 }
 
+TEST(Basic, moveConstructor) {
+  S21Matrix m(2,3);
+  S21Matrix res(std::move(m));
+  EXPECT_EQ(res.getRows(), 2);
+  EXPECT_EQ(res.getCols(), 3);
+  EXPECT_EQ(m.getRows(), 0);
+  EXPECT_EQ(m.getCols(), 0);
+  EXPECT_EQ(m.getMatrix(), nullptr);
+}
 
 TEST(supportFunction, removeAndSetZeroMatrix) {
   S21Matrix m(2,3);
@@ -34,3 +44,14 @@ TEST(supportFunction, removeAndSetZeroMatrix) {
   EXPECT_EQ(m.getCols(), 0);
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
+
+//TEST(myTest, TestName) {
+//  int *p = new int[10];
+//  for (int i = 0; i < 10; ++i) {
+//    p[i] = i;
+//    std::cout << p[i] << "\t";
+//  }
+//
+//
+//
+//}

@@ -2,6 +2,7 @@
 
 #include "s21_matrix_oop.h"
 #include <exception>
+#include <utility>
 
 S21Matrix::S21Matrix() {
   setZeroMatrix();
@@ -15,6 +16,16 @@ S21Matrix::S21Matrix(int rows, int cols) {
 
 S21Matrix::S21Matrix(const S21Matrix &other) {
   this->copyMatrix(other);
+}
+
+S21Matrix::S21Matrix(S21Matrix &&other) {
+//  this->copyMatrix(other);
+  this->setZeroMatrix();
+  std::swap(this->rows, other.rows);
+  std::swap(this->cols, other.cols);
+  std::swap(this->matrix, other.matrix);
+//  other.removeMatrix();
+//  other.setZeroMatrix();
 }
 
 int S21Matrix::getRows() const {

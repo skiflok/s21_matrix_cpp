@@ -13,6 +13,10 @@ S21Matrix::S21Matrix(int rows, int cols) {
   this->createMatrix();
 }
 
+S21Matrix::S21Matrix(const S21Matrix &other) {
+  this->copyMatrix(other);
+}
+
 int S21Matrix::getRows() const {
   return rows;
 }

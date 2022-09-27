@@ -36,6 +36,15 @@ void S21Matrix::createMatrix() {
   }
 }
 
+void S21Matrix::removeMatrix() {
+  if (this->matrix != nullptr) {
+    for (int i = 0; i < this->rows; ++i) {
+      delete[] this->matrix[i];
+    }
+    delete[] this->matrix;
+  }
+}
+
 void S21Matrix::copyMatrix(const S21Matrix &other) {
   this->rows = other.rows;
   this->cols = other.cols;
@@ -60,13 +69,8 @@ S21Matrix::~S21Matrix() {
 //
 //  }
   if (matrix != nullptr) {
-    for (int i = 0; i < rows; ++i) {
-      delete[] matrix[i];
-    }
-    delete[] matrix;
-    matrix = nullptr;
-    rows = 0;
-    cols = 0;
+    this->removeMatrix();
+    this->setZeroMatrix();
   }
 }
 

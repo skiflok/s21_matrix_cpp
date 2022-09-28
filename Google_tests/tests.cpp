@@ -48,6 +48,22 @@ TEST(GetterAndSetter, setRows) {
   EXPECT_EQ(m.getRows(), 4);
   EXPECT_EQ(m.getCols(), 3);
 }
+
+TEST(GetterAndSetter, setCols) {
+
+  S21Matrix m(2, 3);
+  m[1][1] = 4.4;
+  EXPECT_EQ(m(1,1), 4.4);
+  EXPECT_EQ(m.getRows(), 2);
+  EXPECT_EQ(m.getCols(), 3);
+  m.setCols(5);
+  m[1][4] = 5.5;
+  EXPECT_EQ(m(1,1), 4.4);
+  EXPECT_EQ(m(1,4), 5.5);
+  EXPECT_EQ(m.getRows(), 2);
+  EXPECT_EQ(m.getCols(), 5);
+}
+
 TEST(assignmentOperator, brakets) {
   S21Matrix m(2, 3);
   m(1, 1) = 3;

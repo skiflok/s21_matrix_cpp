@@ -65,8 +65,17 @@ void S21Matrix::setRows(int new_rows) {
   this->moveMatrix(std::move(tmp));
 }
 
-void S21Matrix::setCols(int cols) {
+void S21Matrix::setCols(int new_cols) {
+  if (new_cols <= 0)
+    throw std::length_error("Array size can't be zero");
 
+  S21Matrix tmp(this->rows, new_cols);
+  for (int i = 0; i < this->rows; ++i) {
+    for (int j = 0; j < (new_cols < this->cols ? new_cols : this->cols); ++j) {
+      tmp[i][j] = (*this) [i][j];
+    }
+  }
+  this->moveMatrix(std::move(tmp));
 }
 
 // assignment operator overload

@@ -34,6 +34,8 @@ S21Matrix::~S21Matrix() {
   }
 }
 
+// getters and setters
+
 int S21Matrix::getRows() const {
   return rows;
 }
@@ -51,6 +53,20 @@ void S21Matrix::setRows(int rows) {
 void S21Matrix::setCols(int cols) {
 
 }
+
+// assignment operator overload
+double &S21Matrix::operator()(int row, int col) {
+  if (row >= rows || col >= cols) {
+    throw std::out_of_range("Incorrect input, index is out of range");
+  }
+  return matrix[row * col + col];
+}
+
+double *S21Matrix::operator[](int i){
+  return 0;
+}
+
+// support function
 
 void S21Matrix::setZeroMatrix() {
   this->cols = 0;

@@ -30,8 +30,7 @@ class S21Matrix {
   S21Matrix &operator*=(const double number);       // *=	Присвоение умножения (mul_matrix/mul_number)
 
   // assignment operator overload
-  int &operator()(int row,
-                  int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы
+  double &operator()(int row, int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы
   double *operator[](int i);
 
   // some public methods

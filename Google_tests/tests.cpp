@@ -34,6 +34,17 @@ TEST(Basic, moveConstructor) {
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
 
+TEST(assignmentOperator, brakets) {
+  S21Matrix m(2, 3);
+  m(1, 1) = 3;
+  EXPECT_EQ(m(1, 1), 3);
+}
+
+TEST(assignmentOperator, braketsTrow) {
+  S21Matrix m(2, 3);
+  EXPECT_ANY_THROW(m(1, 5));
+}
+
 TEST(supportFunction, removeAndSetZeroMatrix) {
   S21Matrix m(2, 3);
   EXPECT_EQ(m.getRows(), 2);
@@ -45,17 +56,17 @@ TEST(supportFunction, removeAndSetZeroMatrix) {
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
 
-TEST(myTest, TestName) {
-//  int *p = new int[10];
-//  for (int i = 0; i < 10; ++i) {
-//    p[i] = i;
-//    std::cout << p[i] << "\t";
-//  }
+//TEST(myTest, TestName) {
+////  int *p = new int[10];
+////  for (int i = 0; i < 10; ++i) {
+////    p[i] = i;
+////    std::cout << p[i] << "\t";
+////  }
+////
+//  S21Matrix test(2, 3);
+////  std::cout << test[0][0] << "\t";
+////  test(0,0) = 1;
+//  std::cout << test.getMatrix()[1] << "\t";
+//  test.getMatrix()[1];
 //
-  S21Matrix test(2, 3);
-//  std::cout << test[0][0] << "\t";
-//  test(0,0) = 1;
-  std::cout << test.getMatrix()[1] << "\t";
-  test.getMatrix()[1];
-
-}
+//}

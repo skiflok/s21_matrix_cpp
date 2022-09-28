@@ -3,6 +3,7 @@
 #include "s21_matrix_oop.h"
 #include <exception>
 #include <utility>
+#include <algorithm>
 
 S21Matrix::S21Matrix() {
   setZeroMatrix();
@@ -19,13 +20,18 @@ S21Matrix::S21Matrix(const S21Matrix &other) {
 }
 
 S21Matrix::S21Matrix(S21Matrix &&other) {
-//  this->copyMatrix(other);
   this->setZeroMatrix();
   std::swap(this->rows, other.rows);
   std::swap(this->cols, other.cols);
   std::swap(this->matrix, other.matrix);
-//  other.removeMatrix();
-//  other.setZeroMatrix();
+
+}
+
+S21Matrix::~S21Matrix() {
+  if (matrix != nullptr) {
+    this->removeMatrix();
+    this->setZeroMatrix();
+  }
 }
 
 int S21Matrix::getRows() const {
@@ -34,8 +40,16 @@ int S21Matrix::getRows() const {
 int S21Matrix::getCols() const {
   return cols;
 }
-double **S21Matrix::getMatrix() const {
+double *S21Matrix::getMatrix() const {
   return matrix;
+}
+
+void S21Matrix::setRows(int rows) {
+
+}
+
+void S21Matrix::setCols(int cols) {
+
 }
 
 void S21Matrix::setZeroMatrix() {
@@ -45,49 +59,35 @@ void S21Matrix::setZeroMatrix() {
 }
 
 void S21Matrix::createMatrix() {
-  this->matrix = new double *[rows];
-  for (int i = 0; i < rows; ++i) {
-    this->matrix[i] = new double[cols];
-  }
+//  this->matrix = new double *[rows];
+//  for (int i = 0; i < rows; ++i) {
+//    this->matrix[i] = new double[cols];
+//  }
+  this->matrix = new double [rows * cols];
 }
 
 void S21Matrix::removeMatrix() {
-  if (this->matrix != nullptr) {
-    for (int i = 0; i < this->rows; ++i) {
-      delete[] this->matrix[i];
-    }
+//  if (this->matrix != nullptr) {
+//    for (int i = 0; i < this->rows; ++i) {
+//      delete[] this->matrix[i];
+//    }
     delete[] this->matrix;
-  }
+//  }
 }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {
   this->rows = other.rows;
   this->cols = other.cols;
   this->createMatrix();
-  for (int i = 0; i < this->rows; ++i) {
-    for (int j = 0; j < this->cols; ++j) {
-      this->matrix[i][j] = other.matrix[i][j];
-    }
-  }
+//  for (int i = 0; i < this->rows; ++i) {
+//    for (int j = 0; j < this->cols; ++j) {
+//      this->matrix[i][j] = other.matrix[i][j];
+//    }
+//  }
+  std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
 }
 
-S21Matrix::~S21Matrix() {
-//  try {
-//    for (int i = 0; i < rows; ++i) {
-//      delete[] matrix[i];
-//    }
-//    delete[] matrix;
-//    matrix = nullptr;
-//    rows = 0;
-//    cols = 0;
-//  } catch (std::exception) {
-//
-//  }
-  if (matrix != nullptr) {
-    this->removeMatrix();
-    this->setZeroMatrix();
-  }
-}
+
 
 
 

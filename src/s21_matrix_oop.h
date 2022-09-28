@@ -8,7 +8,7 @@
 class S21Matrix {
  private:
   int rows, cols;    // rows and columns attributes
-  double **matrix;   // pointer to the memory where the matrix will be allocated
+  double *matrix;   // pointer to the memory where the matrix will be allocated
 
  public:
   S21Matrix();                              // default constructor
@@ -50,14 +50,15 @@ class S21Matrix {
 
   int getRows() const;
   int getCols() const;
-  double **getMatrix() const;
-
+  double *getMatrix() const;
+  void setRows(int rows);
+  void setCols(int cols);
 
   // support function
 
-  void setZeroMatrix ();
+  void setZeroMatrix();
   void createMatrix();
-  void copyMatrix (const S21Matrix &other);
+  void copyMatrix(const S21Matrix &other);
   void removeMatrix();
 
 };

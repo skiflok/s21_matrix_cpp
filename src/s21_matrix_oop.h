@@ -51,7 +51,7 @@ class S21Matrix {
   int getRows() const;
   int getCols() const;
   double *getMatrix() const;
-  void setRows(int rows);
+  void setRows(int new_rows);
   void setCols(int cols);
 
   // support function
@@ -59,6 +59,7 @@ class S21Matrix {
   void setZeroMatrix();
   void createMatrix();
   void copyMatrix(const S21Matrix &other);
+  void moveMatrix(S21Matrix &&other);
   void removeMatrix();
 
 };

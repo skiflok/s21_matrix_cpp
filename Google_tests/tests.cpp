@@ -34,6 +34,20 @@ TEST(Basic, moveConstructor) {
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
 
+TEST(GetterAndSetter, setRows) {
+
+  S21Matrix m(2, 3);
+  m[1][1] = 4.4;
+  EXPECT_EQ(m(1,1), 4.4);
+  EXPECT_EQ(m.getRows(), 2);
+  EXPECT_EQ(m.getCols(), 3);
+  m.setRows(4);
+  m[3][2] = 5.5;
+  EXPECT_EQ(m(1,1), 4.4);
+  EXPECT_EQ(m(3,2), 5.5);
+  EXPECT_EQ(m.getRows(), 4);
+  EXPECT_EQ(m.getCols(), 3);
+}
 TEST(assignmentOperator, brakets) {
   S21Matrix m(2, 3);
   m(1, 1) = 3;

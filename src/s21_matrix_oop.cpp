@@ -24,7 +24,6 @@ S21Matrix::S21Matrix(S21Matrix &&other) {
   std::swap(this->rows, other.rows);
   std::swap(this->cols, other.cols);
   std::swap(this->matrix, other.matrix);
-
 }
 
 S21Matrix::~S21Matrix() {
@@ -33,6 +32,13 @@ S21Matrix::~S21Matrix() {
     this->setZeroMatrix();
   }
 }
+// some operators overloads
+
+S21Matrix &S21Matrix::operator=(const S21Matrix &other){
+
+  return *this;
+}
+
 
 // getters and setters
 
@@ -46,8 +52,17 @@ double *S21Matrix::getMatrix() const {
   return matrix;
 }
 
-void S21Matrix::setRows(int rows) {
+void S21Matrix::setRows(int new_rows) {
+  if (new_rows <= 0)
+    throw std::length_error("Array size can't be zero");
 
+  S21Matrix tmp(new_rows, this->cols);
+  for (int i = 0; i < (new_rows < this->rows ? new_rows : this->rows); ++i) {
+    for (int j = 0; j < this->cols; ++j) {
+      tmp[i][j] = (*this) [i][j];
+    }
+  }
+  this->moveMatrix(std::move(tmp));
 }
 
 void S21Matrix::setCols(int cols) {
@@ -56,8 +71,6 @@ void S21Matrix::setCols(int cols) {
 
 // assignment operator overload
 
-// 1 2 3
-// 4 5 6
 double &S21Matrix::operator()(int row, int col) {
   if (row >= rows || col >= cols) {
     throw std::out_of_range("Incorrect input, index is out of range");
@@ -108,6 +121,13 @@ void S21Matrix::copyMatrix(const S21Matrix &other) {
   std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
 }
 
+void S21Matrix::moveMatrix(S21Matrix &&other) {
+  this->removeMatrix();
+  this->setZeroMatrix();
+  std::swap(this->rows, other.rows);
+  std::swap(this->cols, other.cols);
+  std::swap(this->matrix, other.matrix);
+}
 
 
 //int main() {

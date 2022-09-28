@@ -38,12 +38,26 @@ TEST(assignmentOperator, brakets) {
   S21Matrix m(2, 3);
   m(1, 1) = 3;
   EXPECT_EQ(m(1, 1), 3);
+  EXPECT_EQ(m[1][1], 3);
 }
 
 TEST(assignmentOperator, braketsTrow) {
   S21Matrix m(2, 3);
   EXPECT_ANY_THROW(m(1, 5));
 }
+
+TEST(assignmentOperator, brakets2) {
+  S21Matrix m(2, 3);
+  m[1][1] = 3;
+  EXPECT_EQ(m(1, 1), 3);
+  EXPECT_EQ(m[1][1], 3);
+}
+
+TEST(assignmentOperator, braketsTrow2) {
+  S21Matrix m(2, 3);
+  EXPECT_ANY_THROW(m[2][5]);
+}
+
 
 TEST(supportFunction, removeAndSetZeroMatrix) {
   S21Matrix m(2, 3);
@@ -66,13 +80,14 @@ TEST(myTest, TestName) {
   int rows = 2, cols = 3;
   S21Matrix test(rows, cols);
 //  std::cout << test[0][0] << "\t";
-  test(1, 1) = 1;
   test[1][2] = 2;
+  test(1, 1) = 1;
   std::cout << test[1][2] << "\t";
   std::cout << test(1, 1) << "\t\n";
 
-  for (int i = 0; i < rows * cols; ++i) {
-//    p[i] = i;
-    std::cout << test.matrix[i] << "\t";
-  }
+//  for (int i = 0; i < rows * cols; ++i) {
+////    p[i] = i;
+//    std::cout << test.matrix[i] << "\t";
+//  }
 }
+

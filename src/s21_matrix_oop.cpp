@@ -55,11 +55,14 @@ void S21Matrix::setCols(int cols) {
 }
 
 // assignment operator overload
+
+// 1 2 3
+// 4 5 6
 double &S21Matrix::operator()(int row, int col) {
   if (row >= rows || col >= cols) {
     throw std::out_of_range("Incorrect input, index is out of range");
   }
-  return matrix[row * col + col];
+  return matrix[row * cols + col];
 }
 
 double *S21Matrix::operator[](int row){

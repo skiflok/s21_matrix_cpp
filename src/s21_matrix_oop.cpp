@@ -62,8 +62,10 @@ double &S21Matrix::operator()(int row, int col) {
   return matrix[row * col + col];
 }
 
-double *S21Matrix::operator[](int i){
-  return 0;
+double *S21Matrix::operator[](int row){
+  if (row >= this->rows)
+    throw std::out_of_range("Incorrect input, index is out of range");
+  return  row * this->cols + this->matrix;
 }
 
 // support function
@@ -79,7 +81,7 @@ void S21Matrix::createMatrix() {
 //  for (int i = 0; i < rows; ++i) {
 //    this->matrix[i] = new double[cols];
 //  }
-  this->matrix = new double [rows * cols];
+  this->matrix = new double [rows * cols]{};
 }
 
 void S21Matrix::removeMatrix() {
@@ -102,8 +104,6 @@ void S21Matrix::copyMatrix(const S21Matrix &other) {
 //  }
   std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
 }
-
-
 
 
 

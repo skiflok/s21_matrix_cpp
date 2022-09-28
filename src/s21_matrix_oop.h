@@ -8,6 +8,7 @@
 class S21Matrix {
  private:
   int rows, cols;    // rows and columns attributes
+ public:
   double *matrix;   // pointer to the memory where the matrix will be allocated
 
  public:

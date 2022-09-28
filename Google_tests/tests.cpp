@@ -56,17 +56,23 @@ TEST(supportFunction, removeAndSetZeroMatrix) {
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
 
-//TEST(myTest, TestName) {
-////  int *p = new int[10];
-////  for (int i = 0; i < 10; ++i) {
-////    p[i] = i;
-////    std::cout << p[i] << "\t";
-////  }
-////
-//  S21Matrix test(2, 3);
-////  std::cout << test[0][0] << "\t";
-////  test(0,0) = 1;
-//  std::cout << test.getMatrix()[1] << "\t";
-//  test.getMatrix()[1];
+TEST(myTest, TestName) {
+//  int *p = new int[10];
+//  for (int i = 0; i < 10; ++i) {
+//    p[i] = i;
+//    std::cout << p[i] << "\t";
+//  }
 //
-//}
+  int rows = 2, cols = 3;
+  S21Matrix test(rows, cols);
+//  std::cout << test[0][0] << "\t";
+  test(1, 1) = 1;
+  test[1][2] = 2;
+  std::cout << test[1][2] << "\t";
+  std::cout << test(1, 1) << "\t\n";
+
+  for (int i = 0; i < rows * cols; ++i) {
+//    p[i] = i;
+    std::cout << test.matrix[i] << "\t";
+  }
+}

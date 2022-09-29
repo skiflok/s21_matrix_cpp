@@ -20,7 +20,7 @@ S21Matrix::S21Matrix(const S21Matrix &other) {
   this->copyMatrix(other);
 }
 
-S21Matrix::S21Matrix(S21Matrix &&other) {
+S21Matrix::S21Matrix(S21Matrix &&other) noexcept {
   this->setZeroMatrix();
   std::swap(this->rows, other.rows);
   std::swap(this->cols, other.cols);
@@ -97,7 +97,7 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
   return *this;
 }
 
-S21Matrix &S21Matrix::operator=(S21Matrix &&other) {
+S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept {
   this->moveMatrix(std::move(other));
   return *this;
 }

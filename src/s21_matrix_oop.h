@@ -14,17 +14,17 @@ class S21Matrix {
   S21Matrix();                              // default constructor
   S21Matrix(int rows, int cols);            // parameterized constructor
   S21Matrix(const S21Matrix &other);        // copy constructor
-  S21Matrix(S21Matrix &&other);             // move constructor
+  S21Matrix(S21Matrix &&other) noexcept ;             // move constructor
   ~S21Matrix();                             // destructor
 
   // some operators overloads
   S21Matrix operator+(const S21Matrix &other);  //    +	Сложение двух матриц	различная размерность матриц
   S21Matrix operator-(const S21Matrix &other);  //    -	Вычитание одной матрицы из другой	различная размерность матриц
   S21Matrix operator*(const S21Matrix &other);  //    *	Умножение матриц число столбцов первой матрицы не равно числу строк второй матрицы
-  S21Matrix operator*(const double number);     //     умножение матрицы на число
+  S21Matrix operator*(double number);     //     умножение матрицы на число
   bool operator==(const S21Matrix &other);      //     ==	Проверка на равенство матриц (eq_matrix)
   S21Matrix &operator=(const S21Matrix &other); //     =	Присвоение матрице значений другой матрицы
-  S21Matrix &operator=(S21Matrix &&other);
+  S21Matrix &operator=(S21Matrix &&other) noexcept ;
   S21Matrix &operator+=(const S21Matrix &other);  // +=	Присвоение сложения (sum_matrix)	различная размерность матриц
   S21Matrix &operator-=(const S21Matrix &other);    // -=	Присвоение разности (sub_matrix)	различная размерность матриц
   S21Matrix &operator*=(const S21Matrix &other);    //   *=	Присвоение умножения (mul_matrix/mul_number)

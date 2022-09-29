@@ -92,6 +92,10 @@ bool S21Matrix::operator==(const S21Matrix &other) {
   return true;
 }
 
+bool S21Matrix::eq_matrix(const S21Matrix &other) {
+  return *this == other;
+}
+
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
   this->copyMatrix(other);
   return *this;

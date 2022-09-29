@@ -227,6 +227,18 @@ TEST(functionalTest, equal) {
   EXPECT_EQ(a == b, false);
 }
 
+TEST(functionalTest, equalFunc) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  EXPECT_EQ(a.eq_matrix(b), false);
+  b.setCols(3);
+  a[1][1] = 1.1;
+  b[1][1] = 1.1;
+  EXPECT_EQ(a.eq_matrix(b), true);
+  b[1][2] = 1.1;
+  EXPECT_EQ(a.eq_matrix(b), false);
+}
+
 
 
 //TEST(myTest, TestName) {

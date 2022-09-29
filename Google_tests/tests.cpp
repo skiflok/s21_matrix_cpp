@@ -150,6 +150,23 @@ TEST(functionalTest, operatiorMinusEx) {
   EXPECT_ANY_THROW(S21Matrix res = a + b);
 }
 
+TEST(functionalTest, operatiorMinus2) {
+  S21Matrix a(2, 2);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  a -= b;
+  EXPECT_DOUBLE_EQ(a[1][1], -1.1);
+}
+
+TEST(functionalTest, operatiorMinusEx2) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(a -= b);
+}
+
 TEST(functionalTest, operatiorMultMatrix) {
   S21Matrix a(3, 2);
   S21Matrix b(2, 3);

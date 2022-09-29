@@ -116,6 +116,23 @@ TEST(functionalTest, operationPlusEx) {
   EXPECT_ANY_THROW(S21Matrix res = a + b);
 }
 
+TEST(functionalTest, operatiorMinus) {
+  S21Matrix a(2, 2);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  S21Matrix res = a - b;
+  EXPECT_DOUBLE_EQ(res[1][1], -1.1);
+}
+
+TEST(functionalTest, operatiorMinusEx) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(S21Matrix res = a + b);
+}
+
 //TEST(myTest, TestName) {
 ////  int *p = new int[10];
 ////  for (int i = 0; i < 10; ++i) {

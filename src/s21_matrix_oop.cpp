@@ -46,6 +46,18 @@ S21Matrix S21Matrix::operator+(const S21Matrix &other) {
   return res;
 }
 
+S21Matrix S21Matrix::operator-(const S21Matrix &other) {
+  if (this->rows != other.rows || this->cols != other.cols)
+    throw std::logic_error("different matrix dimensions");
+  S21Matrix res(this->rows, this->cols);
+  for (int i = 0; i < res.getRows(); ++i) {
+    for (int j = 0; j < res.getCols(); ++j) {
+      res[i][j] = (*this)[i][j] - other[i][j];
+    }
+  }
+  return res;
+}
+
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
   this->copyMatrix(other);
   return *this;

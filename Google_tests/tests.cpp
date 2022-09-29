@@ -99,7 +99,7 @@ TEST(supportFunction, removeAndSetZeroMatrix) {
   EXPECT_EQ(m.getMatrix(), nullptr);
 }
 
-TEST(functionalTest, operationPlus) {
+TEST(functionalTest, Plus) {
   S21Matrix a(2, 2);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -108,7 +108,7 @@ TEST(functionalTest, operationPlus) {
   EXPECT_DOUBLE_EQ(res[1][1], 3.3);
 }
 
-TEST(functionalTest, operationPlusEx) {
+TEST(functionalTest, PlusEx) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -116,7 +116,7 @@ TEST(functionalTest, operationPlusEx) {
   EXPECT_ANY_THROW(S21Matrix res = a + b);
 }
 
-TEST(functionalTest, operationPlus2) {
+TEST(functionalTest, Plus2) {
   S21Matrix a(2, 2);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -125,7 +125,7 @@ TEST(functionalTest, operationPlus2) {
   EXPECT_DOUBLE_EQ(a[1][1], 3.3);
 }
 
-TEST(functionalTest, operationPlusEx2) {
+TEST(functionalTest, PlusEx2) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -133,7 +133,24 @@ TEST(functionalTest, operationPlusEx2) {
   EXPECT_ANY_THROW(a += b);
 }
 
-TEST(functionalTest, operatiorMinus) {
+TEST(functionalTest, Plus3) {
+  S21Matrix a(2, 2);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  a.sum_matrix(b);
+  EXPECT_DOUBLE_EQ(a[1][1], 3.3);
+}
+
+TEST(functionalTest, PlusEx3) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(  a.sum_matrix(b));
+}
+
+TEST(functionalTest, Minus) {
   S21Matrix a(2, 2);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -142,7 +159,7 @@ TEST(functionalTest, operatiorMinus) {
   EXPECT_DOUBLE_EQ(res[1][1], -1.1);
 }
 
-TEST(functionalTest, operatiorMinusEx) {
+TEST(functionalTest, MinusEx) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -150,7 +167,7 @@ TEST(functionalTest, operatiorMinusEx) {
   EXPECT_ANY_THROW(S21Matrix res = a + b);
 }
 
-TEST(functionalTest, operatiorMinus2) {
+TEST(functionalTest, Minus2) {
   S21Matrix a(2, 2);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -159,7 +176,7 @@ TEST(functionalTest, operatiorMinus2) {
   EXPECT_DOUBLE_EQ(a[1][1], -1.1);
 }
 
-TEST(functionalTest, operatiorMinusEx2) {
+TEST(functionalTest, MinusEx2) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -167,7 +184,7 @@ TEST(functionalTest, operatiorMinusEx2) {
   EXPECT_ANY_THROW(a -= b);
 }
 
-TEST(functionalTest, operatiorMultMatrix) {
+TEST(functionalTest, MultMatrix) {
   S21Matrix a(3, 2);
   S21Matrix b(2, 3);
   a[1][1] = 1.1;
@@ -176,7 +193,7 @@ TEST(functionalTest, operatiorMultMatrix) {
   EXPECT_DOUBLE_EQ(res[1][1], 2.2);
 }
 
-TEST(functionalTest, operatiorMultMatrixEx) {
+TEST(functionalTest, MultMatrixEx) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -184,7 +201,7 @@ TEST(functionalTest, operatiorMultMatrixEx) {
   EXPECT_ANY_THROW(S21Matrix res = a * b);
 }
 
-TEST(functionalTest, operatiorMultMatrix2) {
+TEST(functionalTest, MultMatrix2) {
   S21Matrix a(3, 2);
   S21Matrix b(2, 3);
   a[1][1] = 1.1;
@@ -193,7 +210,7 @@ TEST(functionalTest, operatiorMultMatrix2) {
   EXPECT_DOUBLE_EQ(a[1][1], 2.2);
 }
 
-TEST(functionalTest, operatiorMultMatrixEx2) {
+TEST(functionalTest, MultMatrixEx2) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
@@ -201,14 +218,14 @@ TEST(functionalTest, operatiorMultMatrixEx2) {
   EXPECT_ANY_THROW(a *= b);
 }
 
-TEST(functionalTest, operatiorMultMatrixNum) {
+TEST(functionalTest, MultMatrixNum) {
   S21Matrix a(3, 2);
   a[1][1] = 1.1;
   S21Matrix res = a * 2;
   EXPECT_DOUBLE_EQ(res[1][1], 2.2);
 }
 
-TEST(functionalTest, operatiorMultMatrixNum2) {
+TEST(functionalTest, MultMatrixNum2) {
   S21Matrix a(3, 2);
   a[1][1] = 1.1;
   a *= 2;

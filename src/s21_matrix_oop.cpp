@@ -170,6 +170,67 @@ S21Matrix S21Matrix::transpose() {
   return res;
 }
 
+double S21Matrix::determinant() {
+  if (this->rows != this->cols || this->rows <= 0)
+    throw std::length_error("the matrix is not square");
+  S21Matrix tmp(*this);
+
+  double multiplier = 0;
+  double determinant = 1;
+  double result = 0;
+
+  for (int j = 0; j < this->cols - 1; j++) {  // collums
+    for (int i = 1 + j; i < this->rows; i++) {  // rows
+      if (tmp[j][j] == 0) {
+        // try swap string
+        if (!tmp.swapRows(j)) {
+          result = 0;
+          return result;
+        } else {
+          determinant *= -1;
+          continue;
+        }
+      }
+      multiplier = tmp[i][j] / tmp[j][j];
+      tmp = tmp.subRowMultByMultiplier(i, j, multiplier);
+    }
+  }
+
+  for (int i = 0; i < tmp.rows; i++) {
+    determinant *= tmp[i][i];
+  }
+  result = determinant;
+
+  // need del tmp?
+
+  return result;
+}
+
+bool S21Matrix::swapRows(int position) {
+  bool status = false;
+
+  for (int i = position + 1; i < this->rows; i++) {
+    if (*this[i][position] != 0) {
+      status = true;
+      double temp = 0;
+      for (int j = 0; j < this->cols; j++) {
+        temp = (*this)[position][j];
+        (*this)[rows][j] = (*this)[i][j];
+        (*this)[i][j] = temp;
+      }
+      break;
+    }
+  }
+  return status;
+}
+
+S21Matrix S21Matrix::subRowMultByMultiplier(int originRow, int subRow, double multiplier) {
+  for (int i = 0; i < this->cols; i++) {
+    (*this)[originRow][i] -= (*this)[subRow][i] * multiplier;
+  }
+  return *this;
+}
+
 // getters and setters
 
 int S21Matrix::getRows() const {

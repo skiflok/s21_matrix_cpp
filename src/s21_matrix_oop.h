@@ -14,7 +14,7 @@ class S21Matrix {
   S21Matrix();                              // default constructor
   S21Matrix(int rows, int cols);            // parameterized constructor
   S21Matrix(const S21Matrix &other);        // copy constructor
-  S21Matrix(S21Matrix &&other) noexcept ;             // move constructor
+  S21Matrix(S21Matrix &&other) noexcept;             // move constructor
   ~S21Matrix();                             // destructor
 
   // some operators overloads
@@ -24,15 +24,16 @@ class S21Matrix {
   S21Matrix operator*(double number);     //     умножение матрицы на число
   bool operator==(const S21Matrix &other);      //     ==	Проверка на равенство матриц (eq_matrix)
   S21Matrix &operator=(const S21Matrix &other); //     =	Присвоение матрице значений другой матрицы
-  S21Matrix &operator=(S21Matrix &&other) noexcept ;
+  S21Matrix &operator=(S21Matrix &&other) noexcept;
   S21Matrix &operator+=(const S21Matrix &other);  // +=	Присвоение сложения (sum_matrix)	различная размерность матриц
   S21Matrix &operator-=(const S21Matrix &other);    // -=	Присвоение разности (sub_matrix)	различная размерность матриц
   S21Matrix &operator*=(const S21Matrix &other);    //   *=	Присвоение умножения (mul_matrix/mul_number)
   S21Matrix &operator*=(double number);       // *=	Присвоение умножения (mul_matrix/mul_number)
 
   // assignment operator overload
-  double &operator()(int row, int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы
-  double *operator[](int i) const ;
+  double &operator()(int row,
+                     int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы
+  double *operator[](int i) const;
 
   // some public methods
   bool eq_matrix(const S21Matrix &other);            //Проверяет матрицы на равенство между собой
@@ -61,6 +62,8 @@ class S21Matrix {
   void copyMatrix(const S21Matrix &other);
   void moveMatrix(S21Matrix &&other);
   void removeMatrix();
+  bool swapRows(int position);
+  S21Matrix subRowMultByMultiplier(int originRow, int subRow, double multiplier);
 
 };
 

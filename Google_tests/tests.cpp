@@ -316,7 +316,36 @@ TEST(functionalFuncTest, transpose) {
   EXPECT_EQ(m[2][1], 6);
 }
 
+TEST(functionalFuncTest, determinant) {
+  S21Matrix m(4, 4);
+  m[0][0] = 9;
+  m[0][1] = 2;
+  m[0][2] = 2;
+  m[0][3] = 4;
 
+  m[1][0] = 3;
+  m[1][1] = 4;
+  m[1][2] = 4;
+  m[1][3] = 4;
+
+  m[2][0] = 4;
+  m[2][1] = 4;
+  m[2][2] = 9;
+  m[2][3] = 9;
+
+  m[3][0] = 1;
+  m[3][1] = 1;
+  m[3][2] = 5;
+  m[3][3] = 1;
+
+  EXPECT_EQ(m.determinant(), -578);
+}
+
+TEST(functionalFuncTest, determinantEx) {
+  S21Matrix m(4, 3);
+
+  EXPECT_ANY_THROW(m.determinant());
+}
 
 //TEST(myTest, TestName) {
 ////  int *p = new int[10];

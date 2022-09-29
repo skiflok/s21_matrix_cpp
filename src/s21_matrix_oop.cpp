@@ -34,6 +34,11 @@ S21Matrix::~S21Matrix() {
 }
 // some operators overloads
 
+S21Matrix S21Matrix::operator+(const S21Matrix &other) {
+
+  return *this;
+}
+
 S21Matrix &S21Matrix::operator=(const S21Matrix &other){
 
   return *this;
@@ -102,31 +107,17 @@ void S21Matrix::setZeroMatrix() {
 }
 
 void S21Matrix::createMatrix() {
-//  this->matrix = new double *[rows];
-//  for (int i = 0; i < rows; ++i) {
-//    this->matrix[i] = new double[cols];
-//  }
   this->matrix = new double [rows * cols]{};
 }
 
 void S21Matrix::removeMatrix() {
-//  if (this->matrix != nullptr) {
-//    for (int i = 0; i < this->rows; ++i) {
-//      delete[] this->matrix[i];
-//    }
     delete[] this->matrix;
-//  }
 }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {
   this->rows = other.rows;
   this->cols = other.cols;
   this->createMatrix();
-//  for (int i = 0; i < this->rows; ++i) {
-//    for (int j = 0; j < this->cols; ++j) {
-//      this->matrix[i][j] = other.matrix[i][j];
-//    }
-//  }
   std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
 }
 

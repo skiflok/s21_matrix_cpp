@@ -25,6 +25,7 @@ class S21Matrix {
   S21Matrix operator*(const double number);     //     умножение матрицы на число
   bool operator==(const S21Matrix &other);      //     ==	Проверка на равенство матриц (eq_matrix)
   S21Matrix &operator=(const S21Matrix &other); //     =	Присвоение матрице значений другой матрицы
+  S21Matrix &operator=(S21Matrix &&other);
   S21Matrix &operator+=(const S21Matrix &other);  // +=	Присвоение сложения (sum_matrix)	различная размерность матриц
   S21Matrix &operator-=(const S21Matrix &other);    // -=	Присвоение разности (sub_matrix)	различная размерность матриц
   S21Matrix &operator*=(const S21Matrix &other);    //   *=	Присвоение умножения (mul_matrix/mul_number)

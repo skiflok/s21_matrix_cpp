@@ -235,6 +235,23 @@ TEST(functionalTest, MultMatrixEx2) {
   EXPECT_ANY_THROW(a *= b);
 }
 
+TEST(functionalTest, MultMatrix3) {
+  S21Matrix a(3, 2);
+  S21Matrix b(2, 3);
+  a[1][1] = 1.1;
+  b[1][1] = 2;
+  a.mul_matrix(b);
+  EXPECT_DOUBLE_EQ(a[1][1], 2.2);
+}
+
+TEST(functionalTest, MultMatrixEx3) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(a.mul_matrix(b));
+}
+
 TEST(functionalTest, MultMatrixNum) {
   S21Matrix a(3, 2);
   a[1][1] = 1.1;
@@ -246,6 +263,13 @@ TEST(functionalTest, MultMatrixNum2) {
   S21Matrix a(3, 2);
   a[1][1] = 1.1;
   a *= 2;
+  EXPECT_DOUBLE_EQ(a[1][1], 2.2);
+}
+
+TEST(functionalTest, MultMatrixNum3) {
+  S21Matrix a(3, 2);
+  a[1][1] = 1.1;
+  a.mul_number(2);
   EXPECT_DOUBLE_EQ(a[1][1], 2.2);
 }
 

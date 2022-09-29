@@ -118,13 +118,7 @@ S21Matrix &S21Matrix::operator+=(const S21Matrix &other) {
   return *this;
 }
 
-void S21Matrix::sum_matrix(const S21Matrix &other) {
-  *this += other;
-}
 
-void S21Matrix::sub_matrix(const S21Matrix &other) {
-  *this -= other;
-}
 
 S21Matrix &S21Matrix::operator-=(const S21Matrix &other){
   if (this->rows != other.cols || this->cols != other.rows)
@@ -152,6 +146,22 @@ S21Matrix &S21Matrix::operator*=(double number) {
     }
   }
   return *this;
+}
+
+void S21Matrix::sum_matrix(const S21Matrix &other) {
+  *this += other;
+}
+
+void S21Matrix::sub_matrix(const S21Matrix &other) {
+  *this -= other;
+}
+
+void S21Matrix::mul_number(double num) {
+  *this *= num;
+}
+
+void S21Matrix::mul_matrix(const S21Matrix &other) {
+  *this *= other;
 }
 
 // getters and setters

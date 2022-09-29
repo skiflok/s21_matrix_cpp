@@ -102,6 +102,18 @@ S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept {
   return *this;
 }
 
+S21Matrix &S21Matrix::operator+=(const S21Matrix &other) {
+  if (this->rows != other.cols || this->cols != other.rows)
+    throw std::length_error("different matrix dimensions");
+
+  for (int i = 0; i < this->rows; ++i) {
+    for (int j = 0; j < this->cols; ++j) {
+      (*this)[i][j] +=  other[i][j];
+    }
+  }
+
+  return *this;
+}
 
 // getters and setters
 

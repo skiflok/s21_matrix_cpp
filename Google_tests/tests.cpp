@@ -157,6 +157,18 @@ TEST(functionalTest, operatiorMultMatrixNum) {
   EXPECT_DOUBLE_EQ(res[1][1], 2.2);
 }
 
+TEST(functionalTest, equal) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  EXPECT_EQ(a==b, false);
+  b.setCols(3);
+  a[1][1] = 1.1;
+  b[1][1] = 1.1;
+  EXPECT_EQ(a==b, true);
+  b[1][2] = 1.1;
+  EXPECT_EQ(a==b, false);
+}
+
 
 
 //TEST(myTest, TestName) {

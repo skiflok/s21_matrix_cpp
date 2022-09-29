@@ -4,6 +4,7 @@
 #include <exception>
 #include <utility>
 #include <algorithm>
+#include <cmath>
 
 S21Matrix::S21Matrix() {
   setZeroMatrix();
@@ -79,6 +80,16 @@ S21Matrix S21Matrix::operator*(const double number) {
     }
   }
   return res;
+}
+
+bool S21Matrix::operator==(const S21Matrix &other) {
+  if (this->rows != other.rows || this->cols != other.cols)
+    return false;
+  for (int i = 0; i < this->getRows(); i++)
+    for (int j = 0; j < this->getCols(); j++)
+      if (std::fabs((*this)[i][j] - other[i][j]) > 1e-07)
+        return false;
+  return true;
 }
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) {

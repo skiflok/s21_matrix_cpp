@@ -28,7 +28,7 @@ class S21Matrix {
   S21Matrix &operator+=(const S21Matrix &other);  // +=	Присвоение сложения (sum_matrix)	различная размерность матриц
   S21Matrix &operator-=(const S21Matrix &other);    // -=	Присвоение разности (sub_matrix)	различная размерность матриц
   S21Matrix &operator*=(const S21Matrix &other);    //   *=	Присвоение умножения (mul_matrix/mul_number)
-  S21Matrix &operator*=(const double number);       // *=	Присвоение умножения (mul_matrix/mul_number)
+  S21Matrix &operator*=(double number);       // *=	Присвоение умножения (mul_matrix/mul_number)
 
   // assignment operator overload
   double &operator()(int row, int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы

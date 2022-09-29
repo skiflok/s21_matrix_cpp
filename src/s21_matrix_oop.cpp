@@ -133,6 +133,14 @@ S21Matrix &S21Matrix::operator*=(const S21Matrix &other) {
   return *this;
 }
 
+S21Matrix &S21Matrix::operator*=(double number) {
+  for (int i = 0; i < this->rows; ++i) {
+    for (int j = 0; j < this->cols; ++j) {
+      (*this)[i][j] = (*this)[i][j] * number;
+    }
+  }
+  return *this;
+}
 
 // getters and setters
 

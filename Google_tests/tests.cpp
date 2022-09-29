@@ -147,7 +147,7 @@ TEST(functionalTest, PlusEx3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  EXPECT_ANY_THROW(  a.sum_matrix(b));
+  EXPECT_ANY_THROW(a.sum_matrix(b));
 }
 
 TEST(functionalTest, Minus) {
@@ -337,8 +337,16 @@ TEST(functionalFuncTest, determinant) {
   m[3][1] = 1;
   m[3][2] = 5;
   m[3][3] = 1;
-
   EXPECT_EQ(m.determinant(), -578);
+  S21Matrix m1(1, 1);
+  m1[0][0] = 10;
+  EXPECT_EQ(m1.determinant(), 10);
+  S21Matrix m2(2, 2);
+  m2[0][0] = 1.1;
+  m2[0][1] = 3.5;
+  m2[1][0] = -2;
+  m2[1][1] = 4;
+  EXPECT_DOUBLE_EQ(m2.determinant(), 11.4);
 }
 
 TEST(functionalFuncTest, determinantEx) {

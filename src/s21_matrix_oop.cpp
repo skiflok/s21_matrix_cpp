@@ -173,6 +173,13 @@ S21Matrix S21Matrix::transpose() {
 double S21Matrix::determinant() {
   if (this->rows != this->cols || this->rows <= 0)
     throw std::length_error("the matrix is not square");
+
+  if (this->rows == 1) return (*this)[0][0];
+  if (this->rows == 2) {
+    return ((*this)[0][0] * (*this)[1][1]) -
+        ((*this)[0][1] * (*this)[1][0]);
+  }
+
   S21Matrix tmp(*this);
 
   double multiplier = 0;

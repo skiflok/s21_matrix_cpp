@@ -297,6 +297,25 @@ TEST(functionalTest, equalFunc) {
   EXPECT_EQ(a.eq_matrix(b), false);
 }
 
+TEST(functionalFuncTest, transpose) {
+  S21Matrix m(2, 3);
+  m[0][0] = 1;
+  m[0][1] = 2;
+  m[0][2] = 3;
+  m[1][0] = 4;
+  m[1][1] = 5;
+  m[1][2] = 6;
+  // 1 2 3
+  // 4 5 6
+  EXPECT_EQ(m[1][1], 5);
+  m = std::move(m.transpose());
+  // 1 4
+  // 2 5
+  // 3 6
+  EXPECT_EQ(m[0][0], 1);
+  EXPECT_EQ(m[2][1], 6);
+}
+
 
 
 //TEST(myTest, TestName) {

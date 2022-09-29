@@ -112,21 +112,19 @@ S21Matrix &S21Matrix::operator+=(const S21Matrix &other) {
 
   for (int i = 0; i < this->rows; ++i) {
     for (int j = 0; j < this->cols; ++j) {
-      (*this)[i][j] +=  other[i][j];
+      (*this)[i][j] += other[i][j];
     }
   }
   return *this;
 }
 
-
-
-S21Matrix &S21Matrix::operator-=(const S21Matrix &other){
+S21Matrix &S21Matrix::operator-=(const S21Matrix &other) {
   if (this->rows != other.cols || this->cols != other.rows)
     throw std::length_error("different matrix dimensions");
 
   for (int i = 0; i < this->rows; ++i) {
     for (int j = 0; j < this->cols; ++j) {
-      (*this)[i][j] -=  other[i][j];
+      (*this)[i][j] -= other[i][j];
     }
   }
   return *this;
@@ -162,6 +160,14 @@ void S21Matrix::mul_number(double num) {
 
 void S21Matrix::mul_matrix(const S21Matrix &other) {
   *this *= other;
+}
+
+S21Matrix S21Matrix::transpose() {
+  S21Matrix res(this->cols, this->rows);
+  for (int i = 0; i < this->rows; i++)
+    for (int j = 0; j < this->cols; j++)
+      res[j][i] = (*this)[i][j];
+  return res;
 }
 
 // getters and setters

@@ -150,6 +150,15 @@ TEST(functionalTest, operatiorMultMatrixEx) {
   EXPECT_ANY_THROW(S21Matrix res = a * b);
 }
 
+TEST(functionalTest, operatiorMultMatrixNum) {
+  S21Matrix a(3, 2);
+  a[1][1] = 1.1;
+  S21Matrix res = a * 2;
+  EXPECT_DOUBLE_EQ(res[1][1], 2.2);
+}
+
+
+
 //TEST(myTest, TestName) {
 ////  int *p = new int[10];
 ////  for (int i = 0; i < 10; ++i) {

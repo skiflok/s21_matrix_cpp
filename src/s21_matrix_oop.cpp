@@ -64,11 +64,20 @@ S21Matrix S21Matrix::operator*(const S21Matrix &other) {
     throw std::length_error("different matrix dimensions");
   S21Matrix res(this->rows, other.cols);
 
-  for (uint32_t i = 0; i < res.getRows(); i++)
-    for (uint32_t j = 0; j < res.getCols(); j++)
-      for (uint32_t k = 0; k < this->cols; k++)
+  for (int i = 0; i < res.getRows(); i++)
+    for (int j = 0; j < res.getCols(); j++)
+      for (int k = 0; k < this->cols; k++)
         res[i][j] += (*this)[i][k] * other[k][j];
+  return res;
+}
 
+S21Matrix S21Matrix::operator*(const double number) {
+  S21Matrix res(this->rows, this->cols);
+  for (int i = 0; i < res.getRows(); ++i) {
+    for (int j = 0; j < res.getCols(); ++j) {
+      res[i][j] = (*this)[i][j] * number;
+    }
+  }
   return res;
 }
 

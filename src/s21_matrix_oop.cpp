@@ -186,25 +186,3 @@ void S21Matrix::moveMatrix(S21Matrix &&other) {
   std::swap(this->cols, other.cols);
   std::swap(this->matrix, other.matrix);
 }
-
-
-//int main() {
-//
-//  int *a = new int;
-//  delete a;
-//  int *arr = new int [10];
-//  delete [] arr;
-//  arr = nullptr;
-//
-//  std::cout << "test\n";
-//
-////  S21Matrix m(3, 4);
-//
-//  S21Matrix m;
-//
-//
-//  std::cout << m.GetRows() << "  " << m.GetCols() << "\n";
-//
-//
-//  return 0;
-//}

@@ -8,7 +8,6 @@
 class S21Matrix {
  private:
   int rows, cols;    // rows and columns attributes
- public:
   double *matrix;   // pointer to the memory where the matrix will be allocated
 
  public:
@@ -33,7 +32,7 @@ class S21Matrix {
 
   // assignment operator overload
   double &operator()(int row, int col);    //Индексация по элементам матрицы (строка, колонка)	индекс за пределами матрицы
-  double *operator[](int i);
+  double *operator[](int i) const ;
 
   // some public methods
   bool eq_matrix(const S21Matrix &other);            //Проверяет матрицы на равенство между собой

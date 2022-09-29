@@ -35,12 +35,24 @@ S21Matrix::~S21Matrix() {
 // some operators overloads
 
 S21Matrix S21Matrix::operator+(const S21Matrix &other) {
+  if (this->rows != other.rows || this->cols != other.cols)
+    throw std::logic_error("different matrix dimensions");
+  S21Matrix res(this->rows, this->cols);
+  for (int i = 0; i < res.getRows(); ++i) {
+    for (int j = 0; j < res.getCols(); ++j) {
+      res[i][j] = (*this)[i][j] + other[i][j];
+    }
+  }
+  return res;
+}
 
+S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
+  this->copyMatrix(other);
   return *this;
 }
 
-S21Matrix &S21Matrix::operator=(const S21Matrix &other){
-
+S21Matrix &S21Matrix::operator=(S21Matrix &&other) {
+  this->moveMatrix(std::move(other));
   return *this;
 }
 
@@ -64,7 +76,7 @@ void S21Matrix::setRows(int new_rows) {
   S21Matrix tmp(new_rows, this->cols);
   for (int i = 0; i < (new_rows < this->rows ? new_rows : this->rows); ++i) {
     for (int j = 0; j < this->cols; ++j) {
-      tmp[i][j] = (*this) [i][j];
+      tmp[i][j] = (*this)[i][j];
     }
   }
   this->moveMatrix(std::move(tmp));
@@ -77,7 +89,7 @@ void S21Matrix::setCols(int new_cols) {
   S21Matrix tmp(this->rows, new_cols);
   for (int i = 0; i < this->rows; ++i) {
     for (int j = 0; j < (new_cols < this->cols ? new_cols : this->cols); ++j) {
-      tmp[i][j] = (*this) [i][j];
+      tmp[i][j] = (*this)[i][j];
     }
   }
   this->moveMatrix(std::move(tmp));
@@ -92,10 +104,10 @@ double &S21Matrix::operator()(int row, int col) {
   return matrix[row * cols + col];
 }
 
-double *S21Matrix::operator[](int row){
+double *S21Matrix::operator[](int row) const {
   if (row >= this->rows)
     throw std::out_of_range("Incorrect input, index is out of range");
-  return  row * this->cols + this->matrix;
+  return row * this->cols + this->matrix;
 }
 
 // support function
@@ -107,11 +119,11 @@ void S21Matrix::setZeroMatrix() {
 }
 
 void S21Matrix::createMatrix() {
-  this->matrix = new double [rows * cols]{};
+  this->matrix = new double[rows * cols]{};
 }
 
 void S21Matrix::removeMatrix() {
-    delete[] this->matrix;
+  delete[] this->matrix;
 }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {

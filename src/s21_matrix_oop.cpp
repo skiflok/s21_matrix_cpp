@@ -126,6 +126,14 @@ S21Matrix &S21Matrix::operator-=(const S21Matrix &other){
   return *this;
 }
 
+S21Matrix &S21Matrix::operator*=(const S21Matrix &other) {
+  S21Matrix res(this->rows, other.cols);
+  res = *this * other;
+  *this = std::move(res);
+  return *this;
+}
+
+
 // getters and setters
 
 int S21Matrix::getRows() const {

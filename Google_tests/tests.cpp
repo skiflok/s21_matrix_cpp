@@ -184,6 +184,23 @@ TEST(functionalTest, MinusEx2) {
   EXPECT_ANY_THROW(a -= b);
 }
 
+TEST(functionalTest, Minus3) {
+  S21Matrix a(2, 2);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  a.sub_matrix(b);
+  EXPECT_DOUBLE_EQ(a[1][1], -1.1);
+}
+
+TEST(functionalTest, MinusEx3) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(a.sub_matrix(b));
+}
+
 TEST(functionalTest, MultMatrix) {
   S21Matrix a(3, 2);
   S21Matrix b(2, 3);

@@ -122,6 +122,10 @@ void S21Matrix::sum_matrix(const S21Matrix &other) {
   *this += other;
 }
 
+void S21Matrix::sub_matrix(const S21Matrix &other) {
+  *this -= other;
+}
+
 S21Matrix &S21Matrix::operator-=(const S21Matrix &other){
   if (this->rows != other.cols || this->cols != other.rows)
     throw std::length_error("different matrix dimensions");

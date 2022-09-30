@@ -217,7 +217,7 @@ bool S21Matrix::swapRows(int position) {
   bool status = false;
 
   for (int i = position + 1; i < this->rows; i++) {
-    if (*this[i][position] != 0) {
+    if ((*this)[i][position] != 0) {
       status = true;
       double temp = 0;
       for (int j = 0; j < this->cols; j++) {
@@ -279,8 +279,6 @@ S21Matrix S21Matrix::minorMatrix() {
 }
 
 S21Matrix S21Matrix::getDecMatrix(S21Matrix &other, int rowIndex, int colIndex) {
-
-
   for (int i = 0, a = 0; i < this->rows; i++) {
     if (rowIndex != i) {
       for (int j = 0, b = 0; j < this->rows; j++) {
@@ -292,10 +290,25 @@ S21Matrix S21Matrix::getDecMatrix(S21Matrix &other, int rowIndex, int colIndex) 
       a++;
     }
   }
-
   return other;
 }
 
+S21Matrix S21Matrix::inverseMatrix() {
+  if (this->rows != this->cols || this->rows <= 0)
+    throw std::length_error("the matrix is not square");
+
+  double det = this->determinant();
+  if (std::fabs(det) < 1e-06)
+    throw std::logic_error("Determinant can't be zero to calculate inverse");
+
+  S21Matrix tmp = this->calcComplements().transpose();
+  S21Matrix res(this->rows, this->cols);
+
+  res = tmp * (1/det);
+
+  return res;
+
+}
 
 // getters and setters
 

@@ -389,24 +389,68 @@ TEST(functionalFuncTest, calcComplementsEx) {
   EXPECT_ANY_THROW(m.calcComplements());
 }
 
+TEST(functionalFuncTest, inverseMatrix) {
 
-//TEST(myTest, TestName) {
-////  int *p = new int[10];
-////  for (int i = 0; i < 10; ++i) {
-////    p[i] = i;
-////    std::cout << p[i] << "\t";
-////  }
-////
-//  int rows = 2, cols = 3;
-//  S21Matrix test(rows, cols);
-////  std::cout << test[0][0] << "\t";
-//  test[1][2] = 2;
-//  test(1, 1) = 1;
-//  std::cout << test[1][2] << "\t";
-//  std::cout << test(1, 1) << "\t\n";
-//
-////  for (int i = 0; i < rows * cols; ++i) {
-//////    p[i] = i;
-////    std::cout << test.matrix[i] << "\t";
-////  }
-//}
+
+  S21Matrix m(3,3);
+  // var 1
+  m[0][0] = 4;
+  m[0][1] = -2;
+  m[0][2] = 1;
+  m[1][0] = 1;
+  m[1][1] = 6;
+  m[1][2] = -2;
+  m[2][0] = 1;
+  m[2][1] = 0;
+  m[2][2] = 0;
+
+  m = m.inverseMatrix();
+
+  EXPECT_EQ(m[0][1], 0);
+  EXPECT_EQ(m[0][2], 1);
+  EXPECT_EQ(m[1][0], 1);
+  EXPECT_EQ(m[2][0], 3);
+  EXPECT_EQ(m[2][1], 1);
+  EXPECT_EQ(m[2][2], -13);
+
+}
+
+TEST(functionalFuncTest, inverseMatrixEx) {
+  S21Matrix m(3, 3);
+
+//  determ = 0
+  m[0][0] = 1;
+  m[0][1] = 1;
+  m[0][2] = 3;
+  m[1][0] = 4;
+  m[1][1] = 4;
+  m[1][2] = 6;
+  m[2][0] = 4;
+  m[2][1] = 4;
+  m[2][2] = 9;
+  EXPECT_EQ(m.determinant(), 0);
+  EXPECT_ANY_THROW(m.inverseMatrix());
+  }
+
+TEST(functionalFuncTest, inverseMatrixEx2) {
+  S21Matrix m(3, 3);
+
+  m[0][0] = 1;
+  m[0][1] = 4;
+  m[0][2] = 1;
+  m[1][0] = 3;
+  m[1][1] = 7;
+  m[1][2] = 2;
+  m[2][0] = 3;
+  m[2][1] = 2;
+  m[2][2] = 1;
+  EXPECT_EQ(m.determinant(), 0);
+  EXPECT_ANY_THROW(m.inverseMatrix());
+}
+
+
+TEST(functionalFuncTest, inverseMatrixEx3) {
+  S21Matrix m(3, 2);
+  EXPECT_ANY_THROW(m.inverseMatrix());
+
+}

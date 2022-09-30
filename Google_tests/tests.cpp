@@ -138,7 +138,7 @@ TEST(functionalTest, Plus3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  a.sum_matrix(b);
+  a.sumMatrix(b);
   EXPECT_DOUBLE_EQ(a[1][1], 3.3);
 }
 
@@ -147,7 +147,7 @@ TEST(functionalTest, PlusEx3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  EXPECT_ANY_THROW(a.sum_matrix(b));
+  EXPECT_ANY_THROW(a.sumMatrix(b));
 }
 
 TEST(functionalTest, Minus) {
@@ -189,7 +189,7 @@ TEST(functionalTest, Minus3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  a.sub_matrix(b);
+  a.subMatrix(b);
   EXPECT_DOUBLE_EQ(a[1][1], -1.1);
 }
 
@@ -198,7 +198,7 @@ TEST(functionalTest, MinusEx3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  EXPECT_ANY_THROW(a.sub_matrix(b));
+  EXPECT_ANY_THROW(a.subMatrix(b));
 }
 
 TEST(functionalTest, MultMatrix) {
@@ -240,7 +240,7 @@ TEST(functionalTest, MultMatrix3) {
   S21Matrix b(2, 3);
   a[1][1] = 1.1;
   b[1][1] = 2;
-  a.mul_matrix(b);
+  a.mulMatrix(b);
   EXPECT_DOUBLE_EQ(a[1][1], 2.2);
 }
 
@@ -249,7 +249,7 @@ TEST(functionalTest, MultMatrixEx3) {
   S21Matrix b(2, 2);
   a[1][1] = 1.1;
   b[1][1] = 2.2;
-  EXPECT_ANY_THROW(a.mul_matrix(b));
+  EXPECT_ANY_THROW(a.mulMatrix(b));
 }
 
 TEST(functionalTest, MultMatrixNum) {
@@ -269,7 +269,7 @@ TEST(functionalTest, MultMatrixNum2) {
 TEST(functionalTest, MultMatrixNum3) {
   S21Matrix a(3, 2);
   a[1][1] = 1.1;
-  a.mul_number(2);
+  a.mulNumber(2);
   EXPECT_DOUBLE_EQ(a[1][1], 2.2);
 }
 
@@ -288,13 +288,13 @@ TEST(functionalTest, equal) {
 TEST(functionalTest, equalFunc) {
   S21Matrix a(2, 3);
   S21Matrix b(2, 2);
-  EXPECT_EQ(a.eq_matrix(b), false);
+  EXPECT_EQ(a.eqMatrix(b), false);
   b.setCols(3);
   a[1][1] = 1.1;
   b[1][1] = 1.1;
-  EXPECT_EQ(a.eq_matrix(b), true);
+  EXPECT_EQ(a.eqMatrix(b), true);
   b[1][2] = 1.1;
-  EXPECT_EQ(a.eq_matrix(b), false);
+  EXPECT_EQ(a.eqMatrix(b), false);
 }
 
 TEST(functionalFuncTest, transpose) {
@@ -375,4 +375,3 @@ TEST(functionalFuncTest, determinantEx) {
 ////    std::cout << test.matrix[i] << "\t";
 ////  }
 //}
-

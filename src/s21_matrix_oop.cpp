@@ -92,7 +92,7 @@ bool S21Matrix::operator==(const S21Matrix &other) {
   return true;
 }
 
-bool S21Matrix::eq_matrix(const S21Matrix &other) {
+bool S21Matrix::eqMatrix(const S21Matrix &other) {
   return *this == other;
 }
 
@@ -146,19 +146,19 @@ S21Matrix &S21Matrix::operator*=(double number) {
   return *this;
 }
 
-void S21Matrix::sum_matrix(const S21Matrix &other) {
+void S21Matrix::sumMatrix(const S21Matrix &other) {
   *this += other;
 }
 
-void S21Matrix::sub_matrix(const S21Matrix &other) {
+void S21Matrix::subMatrix(const S21Matrix &other) {
   *this -= other;
 }
 
-void S21Matrix::mul_number(double num) {
+void S21Matrix::mulNumber(double num) {
   *this *= num;
 }
 
-void S21Matrix::mul_matrix(const S21Matrix &other) {
+void S21Matrix::mulMatrix(const S21Matrix &other) {
   *this *= other;
 }
 
@@ -237,6 +237,10 @@ S21Matrix S21Matrix::subRowMultByMultiplier(int originRow, int subRow, double mu
   }
   return *this;
 }
+
+//S21Matrix S21Matrix::calcComplements() {
+//
+//}
 
 // getters and setters
 

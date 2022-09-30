@@ -263,15 +263,15 @@ S21Matrix S21Matrix::minorMatrix() {
   S21Matrix temp(this->rows - 1, this->cols - 1);
   S21Matrix minor(this->rows, this->cols);
 
-    for (int i = 0; i < this->rows; i++) {
-      for (int j = 0; j < this->cols; j++) {
+  for (int i = 0; i < this->rows; i++) {
+    for (int j = 0; j < this->cols; j++) {
 
-        temp = this->getDecMatrix(temp, i, j);
+      temp = this->getDecMatrix(temp, i, j);
 
-        minor[i][j] = temp.determinant();
+      minor[i][j] = temp.determinant();
 
-      }
     }
+  }
 
 //  s21_remove_matrix(&temp);
 
@@ -304,7 +304,7 @@ S21Matrix S21Matrix::inverseMatrix() {
   S21Matrix tmp = this->calcComplements().transpose();
   S21Matrix res(this->rows, this->cols);
 
-  res = tmp * (1/det);
+  res = tmp * (1 / det);
 
   return res;
 

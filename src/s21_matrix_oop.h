@@ -52,19 +52,69 @@ class S21Matrix {
   int getRows() const;
   int getCols() const;
   double *getMatrix() const;
+  /**
+ * устанавливает новое количество колонок
+ * @param new_rows
+ */
   void setRows(int new_rows);
+  /**
+   * устанавливает новое количество колонок
+   * при увеличении заполняет нулями
+   * при уменьшении отбрасывает значения
+   * @param new_cols новое количество колонок
+   */
   void setCols(int new_cols);
 
   // support function
 
+  /**
+   * устанавливает поля класса в 0 и nullptr
+   */
   void setZeroMatrix();
+  /**
+   * выделяет память в виде одномерного массива
+   */
   void createMatrix();
+  /**
+   * копирует экземпляр класса
+   * @param other
+   */
   void copyMatrix(const S21Matrix &other);
+  /**
+   * перемещает экземпляр класса
+   * @param other
+   */
   void moveMatrix(S21Matrix &&other);
+  /**
+   * очищает память
+   */
   void removeMatrix();
+  /**
+   * пытается поменять строку с 0 на главной диагонали на строку с !0
+   * @param position индекс нуля на главной диагонали
+   * @return вернет true если удалось успешно заменить строку
+   */
   bool swapRows(int position);
+  /**
+   * вычитает из строки строку умноженную на множитель
+   * @param originRow вычитаемая строка
+   * @param subRow вычитающая
+   * @param multiplier множитель
+   * @return
+   */
   S21Matrix subRowMultByMultiplier(int originRow, int subRow, double multiplier);
+  /**
+   * вычисляет матрицу миноров
+   * @return возвращает матрицу миноров
+   */
   S21Matrix minorMatrix();
+  /**
+   * формирует матрицу в которой исключены столбцы и строки для поиска матрицы миноров
+   * @param other временная матрица
+   * @param rowIndex позиция строки
+   * @param colIndex позиция столбца
+   * @return сформированная матрица -1 размерностью
+   */
   S21Matrix getDecMatrix(S21Matrix &other, int rowIndex, int colIndex);
 
 };

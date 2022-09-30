@@ -64,6 +64,8 @@ class S21Matrix {
   void removeMatrix();
   bool swapRows(int position);
   S21Matrix subRowMultByMultiplier(int originRow, int subRow, double multiplier);
+  S21Matrix minorMatrix();
+  S21Matrix getDecMatrix(S21Matrix &other, int rowIndex, int colIndex);
 
 };
 

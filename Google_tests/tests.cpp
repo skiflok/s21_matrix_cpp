@@ -355,6 +355,41 @@ TEST(functionalFuncTest, determinantEx) {
   EXPECT_ANY_THROW(m.determinant());
 }
 
+TEST(functionalFuncTest, calcComplements) {
+  S21Matrix m(3, 3);
+  m[0][0] = 1;
+  m[0][1] = 2;
+  m[0][2] = 3;
+
+  m[1][0] = 0;
+  m[1][1] = 4;
+  m[1][2] = 2;
+
+  m[2][0] = 5;
+  m[2][1] = 2;
+  m[2][2] = 1;
+
+  m = m.calcComplements();
+
+  EXPECT_EQ(m[0][0], 0);
+  EXPECT_EQ(m[0][1], 10);
+  EXPECT_EQ(m[0][2], -20);
+  EXPECT_EQ(m[1][0], 4);
+  EXPECT_EQ(m[1][1], -14);
+  EXPECT_EQ(m[1][2], 8);
+  EXPECT_EQ(m[2][0], -8);
+  EXPECT_EQ(m[2][1], -2);
+  EXPECT_EQ(m[2][2], 4);
+
+}
+
+TEST(functionalFuncTest, calcComplementsEx) {
+  S21Matrix m(4, 3);
+
+  EXPECT_ANY_THROW(m.calcComplements());
+}
+
+
 //TEST(myTest, TestName) {
 ////  int *p = new int[10];
 ////  for (int i = 0; i < 10; ++i) {

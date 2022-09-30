@@ -238,9 +238,64 @@ S21Matrix S21Matrix::subRowMultByMultiplier(int originRow, int subRow, double mu
   return *this;
 }
 
-//S21Matrix S21Matrix::calcComplements() {
-//
-//}
+S21Matrix S21Matrix::calcComplements() {
+  if (this->rows != this->cols || this->rows <= 0)
+    throw std::length_error("the matrix is not square");
+
+  S21Matrix res(this->rows, this->cols);
+
+  res = this->minorMatrix();
+
+  for (int i = 0; i < res.rows; i++) {
+    for (int j = 0; j < res.cols; j++) {
+      res[i][j] *= pow(-1, i + j);
+    }
+  }
+
+  return res;
+}
+
+S21Matrix S21Matrix::minorMatrix() {
+
+  if (this->rows - 1 <= 0 || this->cols - 1 <= 0)
+    throw std::length_error("incorrect matrix size");
+
+  S21Matrix temp(this->rows - 1, this->cols - 1);
+  S21Matrix minor(this->rows, this->cols);
+
+    for (int i = 0; i < this->rows; i++) {
+      for (int j = 0; j < this->cols; j++) {
+
+        temp = this->getDecMatrix(temp, i, j);
+
+        minor[i][j] = temp.determinant();
+
+      }
+    }
+
+//  s21_remove_matrix(&temp);
+
+  return minor;
+}
+
+S21Matrix S21Matrix::getDecMatrix(S21Matrix &other, int rowIndex, int colIndex) {
+
+
+  for (int i = 0, a = 0; i < this->rows; i++) {
+    if (rowIndex != i) {
+      for (int j = 0, b = 0; j < this->rows; j++) {
+        if (colIndex != j) {
+          other[a][b] = (*this)[i][j];
+          b++;
+        }
+      }
+      a++;
+    }
+  }
+
+  return other;
+}
+
 
 // getters and setters
 

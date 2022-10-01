@@ -1,8 +1,9 @@
-CC=gcc -std=c11
-CFLAGS=-Wall -Wextra -Werror
+CC=g++ #-std=c11
+CFLAGS=-Wall -Wextra -Werror -lstdc++
 GCOV_LIBS=--coverage
 BUILD_PATH=./
 SOURCES=s21_matrix_oop.cpp
+TEST_SOURSE = ../Google_tests/tests.cpp
 H=s21_matrix_oop.h
 LIBO=s21_matrix_oop.o
 LIBA=s21_matrix_oop.a
@@ -11,12 +12,18 @@ EXE=test.out
 OS = $(shell uname)
 
 ifeq ($(OS), Darwin)
-	TST_LIBS=-lcheck -lm
+	TST_LIBS= -lm
 else
-	TST_LIBS=-lcheck -pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
+	TST_LIBS= -pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
+	LIB_TEST = /usr/lib/libgtest.a
 endif
 
 all: s21_matrix_oop.a
+
+s21_matrix_oop.a: clean
+	$(CC) $(CFLAGS) -c $(SOURCES) -o $(BUILD_PATH)$(LIBO)
+	ar rcs $(LIBA) $(LIBO)
+	ranlib $(LIBA)
 
 clean:
 	rm -rf *.a && rm -rf *.o *.out
@@ -24,27 +31,14 @@ clean:
 	rm -rf report/ && rm -rf *.
 
 
-test: s21_matrix_oop.a ../test/tests.cpp
-	@$(CC) $(CFLAGS) -lgtest test.cpp s21_matrix_oop.a -o test
-	@./test
-
-test123: s21_matrix_oop.a
-	$(CC) $(CFLAGS) tests.cpp -L. $(LIBA) $(TST_LIBS) -o $(BUILD_PATH)$(EXE)
-	$(BUILD_PATH)$(EXE)
-
-mytest: clean
-	$(CC) $(CFLAGS) $(SOURCES) -o $(EXE)
-	$(BUILD_PATH)$(EXE)
+test: s21_matrix_oop.a 
+	@$(CC) $(CFLAGS) $(TEST_SOURSE) $(LIBA) $(LIB_TEST) -o $(BUILD_PATH)$(EXE)
+	@$(BUILD_PATH)$(EXE)
 
 rebuild: clean all
 
-s21_matrix_oop.a: clean
-	$(CC) $(CFLAGS) -c $(SOURCES) -o $(BUILD_PATH)$(LIBO)
-	ar rcs $(LIBA) $(LIBO)
-	ranlib $(LIBA)
-
 gcov_report: s21_matrix_oop.a
-	$(CC) $(CFLAGS) $(GCOV_LIBS) test.c $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) -o $(BUILD_PATH)$(EXE)
+	$(CC) $(CFLAGS) $(GCOV_LIBS) $(TEST_SOURSE) $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) $(LIB_TEST) -o $(BUILD_PATH)$(EXE)
 	$(BUILD_PATH)$(EXE)
 	lcov -t "test" -c -d $(BUILD_PATH) --output-file $(BUILD_PATH)coverage.info
 	genhtml $(BUILD_PATH)coverage.info --output-directory $(BUILD_PATH)report/
@@ -56,6 +50,6 @@ leaks:
 check:
 	@echo
 	@echo ===STYLE TEST===
-	cp ../materials/linters/CPPLINT.cfg CPPLINT.cfg
-	python3 ../materials/linters/cpplint.py --extension=c *.c *.h
-	rm CPPLINT.cfg
+	cp ../materials/linters/.clang-format ./
+	clang-format -n *.cpp *.h
+	# rm .clang-format

@@ -1,14 +1,13 @@
 
 
 #include "s21_matrix_oop.h"
-#include <exception>
-#include <utility>
+
 #include <algorithm>
 #include <cmath>
+#include <exception>
+#include <utility>
 
-S21Matrix::S21Matrix() {
-  setZeroMatrix();
-}
+S21Matrix::S21Matrix() { setZeroMatrix(); }
 
 S21Matrix::S21Matrix(int rows, int cols) {
   this->rows = rows;
@@ -16,9 +15,7 @@ S21Matrix::S21Matrix(int rows, int cols) {
   this->createMatrix();
 }
 
-S21Matrix::S21Matrix(const S21Matrix &other) {
-  this->copyMatrix(other);
-}
+S21Matrix::S21Matrix(const S21Matrix &other) { this->copyMatrix(other); }
 
 S21Matrix::S21Matrix(S21Matrix &&other) noexcept {
   this->setZeroMatrix();
@@ -60,7 +57,6 @@ S21Matrix S21Matrix::operator-(const S21Matrix &other) {
 }
 
 S21Matrix S21Matrix::operator*(const S21Matrix &other) {
-
   if (this->rows != other.cols || this->cols != other.rows)
     throw std::length_error("different matrix dimensions");
   S21Matrix res(this->rows, other.cols);
@@ -83,18 +79,14 @@ S21Matrix S21Matrix::operator*(const double number) {
 }
 
 bool S21Matrix::operator==(const S21Matrix &other) {
-  if (this->rows != other.rows || this->cols != other.cols)
-    return false;
+  if (this->rows != other.rows || this->cols != other.cols) return false;
   for (int i = 0; i < this->getRows(); i++)
     for (int j = 0; j < this->getCols(); j++)
-      if (std::fabs((*this)[i][j] - other[i][j]) > 1e-07)
-        return false;
+      if (std::fabs((*this)[i][j] - other[i][j]) > 1e-07) return false;
   return true;
 }
 
-bool S21Matrix::eqMatrix(const S21Matrix &other) {
-  return *this == other;
-}
+bool S21Matrix::eqMatrix(const S21Matrix &other) { return *this == other; }
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
   this->copyMatrix(other);
@@ -146,27 +138,18 @@ S21Matrix &S21Matrix::operator*=(double number) {
   return *this;
 }
 
-void S21Matrix::sumMatrix(const S21Matrix &other) {
-  *this += other;
-}
+void S21Matrix::sumMatrix(const S21Matrix &other) { *this += other; }
 
-void S21Matrix::subMatrix(const S21Matrix &other) {
-  *this -= other;
-}
+void S21Matrix::subMatrix(const S21Matrix &other) { *this -= other; }
 
-void S21Matrix::mulNumber(double num) {
-  *this *= num;
-}
+void S21Matrix::mulNumber(double num) { *this *= num; }
 
-void S21Matrix::mulMatrix(const S21Matrix &other) {
-  *this *= other;
-}
+void S21Matrix::mulMatrix(const S21Matrix &other) { *this *= other; }
 
 S21Matrix S21Matrix::transpose() {
   S21Matrix res(this->cols, this->rows);
   for (int i = 0; i < this->rows; i++)
-    for (int j = 0; j < this->cols; j++)
-      res[j][i] = (*this)[i][j];
+    for (int j = 0; j < this->cols; j++) res[j][i] = (*this)[i][j];
   return res;
 }
 
@@ -176,8 +159,7 @@ double S21Matrix::determinant() {
 
   if (this->rows == 1) return (*this)[0][0];
   if (this->rows == 2) {
-    return ((*this)[0][0] * (*this)[1][1]) -
-        ((*this)[0][1] * (*this)[1][0]);
+    return ((*this)[0][0] * (*this)[1][1]) - ((*this)[0][1] * (*this)[1][0]);
   }
 
   S21Matrix tmp(*this);
@@ -186,7 +168,7 @@ double S21Matrix::determinant() {
   double determinant = 1;
   double result = 0;
 
-  for (int j = 0; j < this->cols - 1; j++) {  // collums
+  for (int j = 0; j < this->cols - 1; j++) {    // collums
     for (int i = 1 + j; i < this->rows; i++) {  // rows
       if (tmp[j][j] == 0) {
         // try swap string
@@ -231,7 +213,8 @@ bool S21Matrix::swapRows(int position) {
   return status;
 }
 
-S21Matrix S21Matrix::subRowMultByMultiplier(int originRow, int subRow, double multiplier) {
+S21Matrix S21Matrix::subRowMultByMultiplier(int originRow, int subRow,
+                                            double multiplier) {
   for (int i = 0; i < this->cols; i++) {
     (*this)[originRow][i] -= (*this)[subRow][i] * multiplier;
   }
@@ -256,7 +239,6 @@ S21Matrix S21Matrix::calcComplements() {
 }
 
 S21Matrix S21Matrix::minorMatrix() {
-
   if (this->rows - 1 <= 0 || this->cols - 1 <= 0)
     throw std::length_error("incorrect matrix size");
 
@@ -265,20 +247,19 @@ S21Matrix S21Matrix::minorMatrix() {
 
   for (int i = 0; i < this->rows; i++) {
     for (int j = 0; j < this->cols; j++) {
-
       temp = this->getDecMatrix(temp, i, j);
 
       minor[i][j] = temp.determinant();
-
     }
   }
 
-//  s21_remove_matrix(&temp);
+  //  s21_remove_matrix(&temp);
 
   return minor;
 }
 
-S21Matrix S21Matrix::getDecMatrix(S21Matrix &other, int rowIndex, int colIndex) {
+S21Matrix S21Matrix::getDecMatrix(S21Matrix &other, int rowIndex,
+                                  int colIndex) {
   for (int i = 0, a = 0; i < this->rows; i++) {
     if (rowIndex != i) {
       for (int j = 0, b = 0; j < this->rows; j++) {
@@ -307,24 +288,16 @@ S21Matrix S21Matrix::inverseMatrix() {
   res = tmp * (1 / det);
 
   return res;
-
 }
 
 // getters and setters
 
-int S21Matrix::getRows() const {
-  return rows;
-}
-int S21Matrix::getCols() const {
-  return cols;
-}
-double *S21Matrix::getMatrix() const {
-  return matrix;
-}
+int S21Matrix::getRows() const { return rows; }
+int S21Matrix::getCols() const { return cols; }
+double *S21Matrix::getMatrix() const { return matrix; }
 
 void S21Matrix::setRows(int new_rows) {
-  if (new_rows <= 0)
-    throw std::length_error("Array size can't be zero");
+  if (new_rows <= 0) throw std::length_error("Array size can't be zero");
 
   S21Matrix tmp(new_rows, this->cols);
   for (int i = 0; i < (new_rows < this->rows ? new_rows : this->rows); ++i) {
@@ -336,8 +309,7 @@ void S21Matrix::setRows(int new_rows) {
 }
 
 void S21Matrix::setCols(int new_cols) {
-  if (new_cols <= 0)
-    throw std::length_error("Array size can't be zero");
+  if (new_cols <= 0) throw std::length_error("Array size can't be zero");
 
   S21Matrix tmp(this->rows, new_cols);
   for (int i = 0; i < this->rows; ++i) {
@@ -371,13 +343,9 @@ void S21Matrix::setZeroMatrix() {
   this->matrix = nullptr;
 }
 
-void S21Matrix::createMatrix() {
-  this->matrix = new double[rows * cols]{};
-}
+void S21Matrix::createMatrix() { this->matrix = new double[rows * cols]{}; }
 
-void S21Matrix::removeMatrix() {
-  delete[] this->matrix;
-}
+void S21Matrix::removeMatrix() { delete[] this->matrix; }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {
   this->rows = other.rows;

@@ -1,4 +1,4 @@
-CC=g++ #-std=c11
+CC=g++ -std=c++17
 CFLAGS=-Wall -Wextra -Werror -lstdc++
 GCOV_LIBS=--coverage
 BUILD_PATH=./
@@ -14,8 +14,9 @@ OS = $(shell uname)
 ifeq ($(OS), Darwin)
 	TST_LIBS= -lm
 else
-	TST_LIBS= -pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
-	LIB_TEST = /usr/lib/libgtest.a
+	TST_LIBS= #-pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
+	LIB_TEST = #/usr/lib/libgtest.a
+	LIBFLAGS=-lstdc++ `pkg-config --cflags --libs gtest`
 endif
 
 all: s21_matrix_oop.a
@@ -32,13 +33,13 @@ clean:
 
 
 test: s21_matrix_oop.a 
-	@$(CC) $(CFLAGS) $(TEST_SOURSE) $(LIBA) $(LIB_TEST) -o $(BUILD_PATH)$(EXE)
+	@$(CC) $(CFLAGS) $(TEST_SOURSE) $(LIBA) $(LIB_TEST) $(LIBFLAGS)  -o $(BUILD_PATH)$(EXE)
 	@$(BUILD_PATH)$(EXE)
 
 rebuild: clean all
 
 gcov_report: s21_matrix_oop.a
-	$(CC) $(CFLAGS) $(GCOV_LIBS) $(TEST_SOURSE) $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) $(LIB_TEST) -o $(BUILD_PATH)$(EXE)
+	$(CC) $(CFLAGS) $(GCOV_LIBS) $(TEST_SOURSE) $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) $(LIB_TEST) $(LIBFLAGS) -o $(BUILD_PATH)$(EXE)
 	$(BUILD_PATH)$(EXE)
 	lcov -t "test" -c -d  $(BUILD_PATH)  --no-external --output-file $(BUILD_PATH)coverage.info
 	genhtml $(BUILD_PATH)coverage.info --output-directory $(BUILD_PATH)report/

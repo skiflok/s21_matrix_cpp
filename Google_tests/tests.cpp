@@ -1,13 +1,15 @@
-#include "../src/s21_matrix_oop.h"
 #include <gtest/gtest.h>
+
 #include <utility>
+
+#include "../src/s21_matrix_oop.h"
 
 TEST(Basic, defaultConstructor) {
   S21Matrix m;
   EXPECT_EQ(m.getRows(), 0);
   EXPECT_EQ(m.getCols(), 0);
   EXPECT_EQ(m.getMatrix(), nullptr);
-//  std::cout << "test1" << "\n";
+  //  std::cout << "test1" << "\n";
 }
 
 TEST(Basic, parameterizedCconstructor) {
@@ -35,7 +37,6 @@ TEST(Basic, moveConstructor) {
 }
 
 TEST(GetterAndSetter, setRows) {
-
   S21Matrix m(2, 3);
   m[1][1] = 4.4;
   EXPECT_EQ(m(1, 1), 4.4);
@@ -50,7 +51,6 @@ TEST(GetterAndSetter, setRows) {
 }
 
 TEST(GetterAndSetter, setCols) {
-
   S21Matrix m(2, 3);
   m[1][1] = 4.4;
   EXPECT_EQ(m(1, 1), 4.4);
@@ -83,11 +83,6 @@ TEST(assignmentOperator, brakets2) {
   EXPECT_EQ(m[1][1], 3);
 }
 
-TEST(assignmentOperator, braketsTrow2) {
-  S21Matrix m(2, 3);
-  EXPECT_ANY_THROW(m[2][5]);
-}
-
 TEST(supportFunction, removeAndSetZeroMatrix) {
   S21Matrix m(2, 3);
   EXPECT_EQ(m.getRows(), 2);
@@ -97,6 +92,15 @@ TEST(supportFunction, removeAndSetZeroMatrix) {
   EXPECT_EQ(m.getRows(), 0);
   EXPECT_EQ(m.getCols(), 0);
   EXPECT_EQ(m.getMatrix(), nullptr);
+}
+
+TEST(functionalTest, copy) {
+  S21Matrix a(2, 2);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  a = b;
+  EXPECT_DOUBLE_EQ(a[1][1], 2.2);
 }
 
 TEST(functionalTest, Plus) {
@@ -199,6 +203,14 @@ TEST(functionalTest, MinusEx3) {
   a[1][1] = 1.1;
   b[1][1] = 2.2;
   EXPECT_ANY_THROW(a.subMatrix(b));
+}
+
+TEST(functionalTest, MinusEx4) {
+  S21Matrix a(2, 3);
+  S21Matrix b(2, 2);
+  a[1][1] = 1.1;
+  b[1][1] = 2.2;
+  EXPECT_ANY_THROW(a - b);
 }
 
 TEST(functionalTest, MultMatrix) {
@@ -349,6 +361,30 @@ TEST(functionalFuncTest, determinant) {
   EXPECT_DOUBLE_EQ(m2.determinant(), 11.4);
 }
 
+TEST(functionalFuncTest, determinant2) {
+  S21Matrix m(4, 4);
+  m[0][0] = 1;
+  m[0][1] = 2;
+  m[0][2] = 3;
+  m[0][3] = 4;
+
+  m[1][0] = 1;
+  m[1][1] = 2;
+  m[1][2] = 5;
+  m[1][3] = 7;
+
+  m[2][0] = 1;
+  m[2][1] = 0;
+  m[2][2] = 6;
+  m[2][3] = 8;
+
+  m[3][0] = 1;
+  m[3][1] = 0;
+  m[3][2] = 6;
+  m[3][3] = 6;
+  EXPECT_EQ(m.determinant(), -8);
+}
+
 TEST(functionalFuncTest, determinantEx) {
   S21Matrix m(4, 3);
 
@@ -380,7 +416,6 @@ TEST(functionalFuncTest, calcComplements) {
   EXPECT_EQ(m[2][0], -8);
   EXPECT_EQ(m[2][1], -2);
   EXPECT_EQ(m[2][2], 4);
-
 }
 
 TEST(functionalFuncTest, calcComplementsEx) {
@@ -390,9 +425,7 @@ TEST(functionalFuncTest, calcComplementsEx) {
 }
 
 TEST(functionalFuncTest, inverseMatrix) {
-
-
-  S21Matrix m(3,3);
+  S21Matrix m(3, 3);
   // var 1
   m[0][0] = 4;
   m[0][1] = -2;
@@ -412,13 +445,12 @@ TEST(functionalFuncTest, inverseMatrix) {
   EXPECT_EQ(m[2][0], 3);
   EXPECT_EQ(m[2][1], 1);
   EXPECT_EQ(m[2][2], -13);
-
 }
 
 TEST(functionalFuncTest, inverseMatrixEx) {
   S21Matrix m(3, 3);
 
-//  determ = 0
+  //  determ = 0
   m[0][0] = 1;
   m[0][1] = 1;
   m[0][2] = 3;
@@ -430,7 +462,7 @@ TEST(functionalFuncTest, inverseMatrixEx) {
   m[2][2] = 9;
   EXPECT_EQ(m.determinant(), 0);
   EXPECT_ANY_THROW(m.inverseMatrix());
-  }
+}
 
 TEST(functionalFuncTest, inverseMatrixEx2) {
   S21Matrix m(3, 3);
@@ -448,9 +480,22 @@ TEST(functionalFuncTest, inverseMatrixEx2) {
   EXPECT_ANY_THROW(m.inverseMatrix());
 }
 
-
 TEST(functionalFuncTest, inverseMatrixEx3) {
   S21Matrix m(3, 2);
   EXPECT_ANY_THROW(m.inverseMatrix());
+}
 
+TEST(functionalFuncTest, minorEx) {
+  S21Matrix m(1, 1);
+  EXPECT_ANY_THROW(m.minorMatrix());
+}
+
+TEST(functionalFuncTest, braketEx) {
+  S21Matrix m(1, 1);
+  EXPECT_ANY_THROW(m[5][0] = 5);
+}
+
+int main(int argc, char *argv[]) {
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

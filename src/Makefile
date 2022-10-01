@@ -40,7 +40,7 @@ rebuild: clean all
 gcov_report: s21_matrix_oop.a
 	$(CC) $(CFLAGS) $(GCOV_LIBS) $(TEST_SOURSE) $(SOURCES) $(LIBA) -L. $(LIBA) $(TST_LIBS) $(LIB_TEST) -o $(BUILD_PATH)$(EXE)
 	$(BUILD_PATH)$(EXE)
-	lcov -t "test" -c -d $(BUILD_PATH) --output-file $(BUILD_PATH)coverage.info
+	lcov -t "test" -c -d  $(BUILD_PATH)  --no-external --output-file $(BUILD_PATH)coverage.info
 	genhtml $(BUILD_PATH)coverage.info --output-directory $(BUILD_PATH)report/
 	open ./report/index.html
 

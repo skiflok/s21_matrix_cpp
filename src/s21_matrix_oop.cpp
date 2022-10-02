@@ -15,7 +15,12 @@ S21Matrix::S21Matrix(int rows, int cols) {
   this->createMatrix();
 }
 
-S21Matrix::S21Matrix(const S21Matrix &other) { this->copyMatrix(other); }
+S21Matrix::S21Matrix(const S21Matrix &other) {
+  this->rows = other.rows;
+  this->cols = other.cols;
+  this->createMatrix();
+  std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
+}
 
 S21Matrix::S21Matrix(S21Matrix &&other) noexcept {
   this->setZeroMatrix();
@@ -253,8 +258,6 @@ S21Matrix S21Matrix::minorMatrix() {
     }
   }
 
-  //  s21_remove_matrix(&temp);
-
   return minor;
 }
 
@@ -348,10 +351,13 @@ void S21Matrix::createMatrix() { this->matrix = new double[rows * cols]{}; }
 void S21Matrix::removeMatrix() { delete[] this->matrix; }
 
 void S21Matrix::copyMatrix(const S21Matrix &other) {
-  this->rows = other.rows;
-  this->cols = other.cols;
-  this->createMatrix();
-  std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
+  if (this != &other) {
+    delete[] matrix;
+    this->rows = other.rows;
+    this->cols = other.cols;
+    this->createMatrix();
+    std::copy(other.matrix, other.matrix + rows * cols, this->matrix);
+  }
 }
 
 void S21Matrix::moveMatrix(S21Matrix &&other) {

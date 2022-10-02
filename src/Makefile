@@ -30,6 +30,7 @@ clean:
 	rm -rf *.a && rm -rf *.o *.out
 	rm -rf *.info && rm -rf *.gcda && rm -rf *.gcno &&  rm -rf *.gcov
 	rm -rf report/ && rm -rf *.
+	rm -f RESULT_VALGRIND.txt
 
 
 test: s21_matrix_oop.a 
@@ -53,4 +54,4 @@ check:
 	@echo ===STYLE TEST===
 	cp ../materials/linters/.clang-format ./
 	clang-format -n *.cpp *.h
-	# rm .clang-format
+	rm .clang-format

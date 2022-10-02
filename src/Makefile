@@ -12,10 +12,8 @@ EXE=test.out
 OS = $(shell uname)
 
 ifeq ($(OS), Darwin)
-	TST_LIBS= -lm
+	LIBFLAGS = -lm -lgtest -lstdc++
 else
-	TST_LIBS= #-pthread -lrt -lm -D_GNU_SOURCE -lsubunit -lpthread -g
-	LIB_TEST = #/usr/lib/libgtest.a
 	LIBFLAGS=-lstdc++ `pkg-config --cflags --libs gtest`
 endif
 
@@ -34,7 +32,7 @@ clean:
 
 
 test: s21_matrix_oop.a 
-	@$(CC) $(CFLAGS) $(TEST_SOURSE) $(LIBA) $(LIB_TEST) $(LIBFLAGS)  -o $(BUILD_PATH)$(EXE)
+	@$(CC) $(CFLAGS) $(TEST_SOURSE) $(LIBA)  $(LIBFLAGS)  -o $(BUILD_PATH)$(EXE)
 	@$(BUILD_PATH)$(EXE)
 
 rebuild: clean all

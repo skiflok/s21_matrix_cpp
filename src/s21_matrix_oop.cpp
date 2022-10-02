@@ -204,7 +204,7 @@ bool S21Matrix::swapRows(int position) {
       double temp = 0;
       for (int j = 0; j < this->cols; j++) {
         temp = (*this)[position][j];
-        (*this)[rows][j] = (*this)[i][j];
+        (*this)[position][j] = (*this)[i][j];
         (*this)[i][j] = temp;
       }
       break;

@@ -1,15 +1,9 @@
+#ifndef SRC_S21_MATRIX_OOP_H
+#define SRC_S21_MATRIX_OOP_H
 
-
-#ifndef S21_MATRIX_CPP_S21_MATRIX_OOP_H
-#define S21_MATRIX_CPP_S21_MATRIX_OOP_H
-
-#include <iostream>
+namespace s21_matrix_oop {
 
 class S21Matrix {
- private:
-  int rows, cols;  // rows and columns attributes
-  double *matrix;  // pointer to the memory where the matrix will be allocated
-
  public:
   S21Matrix();                            // default constructor
   S21Matrix(int rows, int cols);          // parameterized constructor
@@ -17,112 +11,95 @@ class S21Matrix {
   S21Matrix(S21Matrix &&other) noexcept;  // move constructor
   ~S21Matrix();                           // destructor
 
-  // some operators overloads
-  S21Matrix operator+(
-      const S21Matrix &other);  //    +	Сложение двух матриц	различная
-                                //    размерность матриц
-  S21Matrix operator-(
-      const S21Matrix &other);  //    -	Вычитание одной матрицы из другой
-                                //    различная размерность матриц
-  S21Matrix operator*(
-      const S21Matrix
-          &other);  //    *	Умножение матриц число столбцов первой матрицы
-                    //    не равно числу строк второй матрицы
-  S21Matrix operator*(double number);  //     умножение матрицы на число
-  bool operator==(const S21Matrix &other);  //     ==	Проверка на равенство
-                                            //     матриц (eq_matrix)
-  S21Matrix &operator=(
-      const S21Matrix
-          &other);  //     =	Присвоение матрице значений другой матрицы
+  // operators overloads
+  S21Matrix operator+(const S21Matrix &other);
+  S21Matrix operator-(const S21Matrix &other);
+  S21Matrix operator*(const S21Matrix &other);
+  S21Matrix operator*(double number);
+  bool operator==(const S21Matrix &other);
+  S21Matrix &operator=(const S21Matrix &other);
   S21Matrix &operator=(S21Matrix &&other) noexcept;
-  S21Matrix &operator+=(
-      const S21Matrix &other);  // +=	Присвоение сложения (sum_matrix)
-                                // различная размерность матриц
-  S21Matrix &operator-=(
-      const S21Matrix &other);  // -=	Присвоение разности (sub_matrix)
-                                // различная размерность матриц
-  S21Matrix &operator*=(
-      const S21Matrix &other);  //   *=	Присвоение умножения
-                                //   (mul_matrix/mul_number)
-  S21Matrix &operator*=(
-      double number);  // *=	Присвоение умножения (mul_matrix/mul_number)
+  S21Matrix &operator+=(const S21Matrix &other);
+  S21Matrix &operator-=(const S21Matrix &other);
+  S21Matrix &operator*=(const S21Matrix &other);
+  S21Matrix &operator*=(double number);
 
   // assignment operator overload
-  double &operator()(int row,
-                     int col);  //Индексация по элементам матрицы (строка,
-                                //колонка)	индекс за пределами матрицы
+  double &operator()(int row, int col);
   double *operator[](int i) const;
 
-  // some public methods
-  bool eqMatrix(
-      const S21Matrix &other);  //Проверяет матрицы на равенство между собой
-  void sumMatrix(const S21Matrix &other);  //Прибавляет вторую матрицы к текущей
-                                           //различная размерность матриц
-  void subMatrix(const S21Matrix &other);  //Вычитает из текущей матрицы другую
-                                           //различная размерность матриц
-  void mulNumber(double num);  //Умножает текущую матрицу на число
-  void mulMatrix(
-      const S21Matrix
-          &other);  //	Умножает текущую матрицу на вторую	число столбцов
-                    //первой матрицы не равно числу строк второй матрицы
-  S21Matrix transpose();  //	Создает новую транспонированную матрицу из
-                          //текущей и возвращает ее
-  S21Matrix calcComplements();  //	Вычисляет матрицу алгебраических
-                                //дополнений текущей матрицы и возвращает ее
-                                //матрица не является квадратной
-  double determinant();  //	Вычисляет и возвращает определитель текущей
-                         //матрицы	матрица не является квадратной
-  S21Matrix inverseMatrix();  //	Вычисляет и возвращает обратную матрицу
-                              //определитель матрицы равен 0
+  //  public methods
+  bool EqMatrix(const S21Matrix &other);
+  void SumMatrix(const S21Matrix &other);
+  void SubMatrix(const S21Matrix &other);
+  void MulNumber(double num);
+  void MulMatrix(const S21Matrix &other);
+  S21Matrix Transpose();
+  S21Matrix CalcComplements();
+  double Determinant();
+  S21Matrix InverseMatrix();
+  /**
+   * вычисляет матрицу миноров
+   * @return возвращает матрицу миноров
+   */
+  S21Matrix MinorMatrix();
 
   // getters and setters
 
-  int getRows() const;
-  int getCols() const;
-  double *getMatrix() const;
+  int GetRows() const;
+  int GetCols() const;
+  double *GetMatrix() const;
   /**
    * устанавливает новое количество колонок
    * @param new_rows
    */
-  void setRows(int new_rows);
+  void SetRows(int new_rows);
   /**
    * устанавливает новое количество колонок
    * при увеличении заполняет нулями
    * при уменьшении отбрасывает значения
    * @param new_cols новое количество колонок
    */
-  void setCols(int new_cols);
+  void SetCols(int new_cols);
+
+ private:
+  int rows_, cols_;
+  double *matrix_;
 
   // support function
 
   /**
    * устанавливает поля класса в 0 и nullptr
    */
-  void setZeroMatrix();
+  void SetZeroMatrix();
+
   /**
    * выделяет память в виде одномерного массива
    */
-  void createMatrix();
+  void CreateMatrix();
+
   /**
    * копирует экземпляр класса
    * @param other
    */
-  void copyMatrix(const S21Matrix &other);
+  void CopyMatrix(const S21Matrix &other);
   /**
    * перемещает экземпляр класса
    * @param other
    */
-  void moveMatrix(S21Matrix &&other);
+  void MoveMatrix(S21Matrix &&other);
+
   /**
    * очищает память
    */
-  void removeMatrix();
+  void RemoveMatrix();
   /**
    * пытается поменять строку с 0 на главной диагонали на строку с !0
    * @param position индекс нуля на главной диагонали
    * @return вернет true если удалось успешно заменить строку
    */
-  bool swapRows(int position);
+  bool SwapRows(int position);
+
   /**
    * вычитает из строки строку умноженную на множитель
    * @param originRow вычитаемая строка
@@ -130,13 +107,9 @@ class S21Matrix {
    * @param multiplier множитель
    * @return
    */
-  S21Matrix subRowMultByMultiplier(int originRow, int subRow,
+  S21Matrix SubRowMultByMultiplier(int originRow, int subRow,
                                    double multiplier);
-  /**
-   * вычисляет матрицу миноров
-   * @return возвращает матрицу миноров
-   */
-  S21Matrix minorMatrix();
+
   /**
    * формирует матрицу в которой исключены столбцы и строки для поиска матрицы
    * миноров
@@ -145,7 +118,9 @@ class S21Matrix {
    * @param colIndex позиция столбца
    * @return сформированная матрица -1 размерностью
    */
-  S21Matrix getDecMatrix(S21Matrix &other, int rowIndex, int colIndex);
+  S21Matrix GetDecMatrix(S21Matrix &other, int rowIndex, int colIndex);
 };
 
-#endif  // S21_MATRIX_CPP_S21_MATRIX_OOP_H
+}  // namespace s21_matrix_oop
+
+#endif  // SRC_S21_MATRIX_OOP_H

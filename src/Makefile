@@ -2,8 +2,8 @@ CC=g++ -std=c++17
 CFLAGS=-Wall -Wextra -Werror -lstdc++
 GCOV_LIBS=--coverage
 BUILD_PATH=./
-SOURCES=s21_matrix_oop.cpp
-TEST_SOURSE = ../Google_tests/tests.cpp
+SOURCES=s21_matrix_oop.cc
+TEST_SOURSE = tests.cc
 H=s21_matrix_oop.h
 LIBO=s21_matrix_oop.o
 LIBA=s21_matrix_oop.a
@@ -51,5 +51,5 @@ check:
 	@echo
 	@echo ===STYLE TEST===
 	cp ../materials/linters/.clang-format ./
-	clang-format -n *.cpp *.h
+	clang-format -n *.cc *.h
 	rm .clang-format

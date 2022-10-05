@@ -26,7 +26,7 @@ class S21Matrix {
 
   // assignment operator overload
   double &operator()(int row, int col);
-  double *operator[](int i) const;
+  double &operator()(int row, int col) const;
 
   //  public methods
   bool EqMatrix(const S21Matrix &other);
